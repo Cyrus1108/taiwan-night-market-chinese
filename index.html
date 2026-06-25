@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Taiwan Night Market Chinese · 台灣夜市華文</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#141110; --panel:#141110; --panel-2:#1f1a15; --card:#251e17; --card-hi:#2f2720;
+  --line:#342a20; --line-soft:#2a221a;
+  --ink:#f5efe5; --ink-soft:#bcb0a0; --ink-faint:#8c8170;
+  --amber:#f4b740; --amber-deep:#e0a01f; --amber-soft:#3a2f15; --gold-text:#f6e6be;
+  --red:#e2574c; --red-soft:#3a201a;
+  --green:#5fce93; --green-soft:#16301f;
+  --blue:#6fb0ee; --blue-soft:#16263a;
+  --cream:#f1e7d4; --cream-ink:#3c3122; --cream-soft:#cbbfa7;
+  --track:#352b1f;
+  --radius:16px; --radius-lg:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Nunito','Noto Sans TC',-apple-system,'Segoe UI','Microsoft JhengHei','PingFang TC',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5}
+.zh,.zh-lg,.zh-sm,.digit-zh{font-family:'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif}
+::-webkit-scrollbar{height:9px;width:9px}
+::-webkit-scrollbar-thumb{background:#3a3026;border-radius:20px}
+::-webkit-scrollbar-track{background:transparent}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+
+.app{display:flex;align-items:flex-start;min-height:100vh}
+
+/* ---------------- SIDEBAR ---------------- */
+.sidebar{position:sticky;top:0;height:100vh;flex:0 0 258px;width:258px;background:var(--panel);
+  border-right:1px solid var(--line);padding:22px 18px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.brand{display:flex;gap:11px;align-items:flex-start}
+.brand .logo{flex:0 0 auto;width:40px;height:40px;border-radius:12px;background:var(--red-soft);
+  display:grid;place-items:center;font-size:22px;border:1px solid #4a2a26}
+.brand .bname{font-family:'Noto Sans TC',sans-serif;font-weight:900;font-size:18px;line-height:1.15}
+.tagline{color:var(--ink-soft);font-size:13px;margin:4px 2px 14px;line-height:1.5}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;color:var(--ink-soft);
+  font-weight:700;font-size:15px;border:1px solid transparent;transition:.15s}
+.nav a .ic{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--card);display:grid;place-items:center}
+.nav a .ic svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav a:hover{color:var(--ink);background:var(--panel-2)}
+.nav a.active{color:var(--gold-text);background:#352a1b;border-color:#54421f}
+.nav a.active .ic{background:#4a3a1f;color:var(--gold-text)}
+.goal{margin-top:auto;padding:10px 4px 4px;text-align:center}
+.goal .boba{width:128px;height:auto;display:block;margin:2px auto 8px}
+.goal .gt{font-weight:800;font-size:13px;color:var(--amber)}
+.goal .gs{font-size:13px;color:var(--ink-soft);margin:2px 0 9px}
+.bar{height:9px;border-radius:20px;background:var(--track);overflow:hidden}
+.bar > i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--amber),var(--amber-deep))}
+.goal .gn{font-size:12px;color:var(--ink-faint);margin-top:6px;font-weight:700}
+
+/* ---------------- MAIN ---------------- */
+.main{flex:1;min-width:0}
+.main-wrap{max-width:1600px;margin:0 auto;padding:20px 26px 50px}
+.topbar{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-bottom:16px}
+.points{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);
+  border-radius:20px;padding:7px 14px;font-weight:800}
+.points .star{color:var(--amber);font-size:15px}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--card);border:1px solid var(--line);
+  display:grid;place-items:center;overflow:hidden}
+.avatar svg{width:34px;height:34px}
+
+/* ---------------- HERO ---------------- */
+.hero{position:relative;overflow:hidden;border-radius:var(--radius-lg);min-height:280px;
+  background:radial-gradient(130% 120% at 88% 0%,#3d2614 0%,#241710 45%,#140d09 100%);
+  border:1px solid #33271a;display:flex;align-items:center}
+#herofx{position:absolute;inset:0;width:100%;height:100%}
+.hero-art{position:absolute;right:0;top:0;height:100%;width:46%;min-width:300px;pointer-events:none}
+.hero-art svg{position:absolute;right:0;bottom:0;height:100%;width:100%}
+.hero-content{position:relative;z-index:3;padding:34px 38px;max-width:560px}
+.hero .hi{color:#ffd9a0;font-weight:800;font-size:16px;letter-spacing:.02em}
+.hero h1{font-family:'Noto Sans TC',sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,40px);
+  line-height:1.15;margin:.18em 0 .5em;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:16px;cursor:pointer;
+  border:none;border-radius:14px;padding:13px 24px;transition:.15s}
+.btn-primary{background:linear-gradient(180deg,#f7c14e,#eaa61c);color:#3a2906;box-shadow:0 6px 18px rgba(234,166,28,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 9px 22px rgba(234,166,28,.45)}
+.btn-primary svg{width:18px;height:18px;stroke:#3a2906;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------------- SECTIONS ---------------- */
+.sec{margin-top:30px;scroll-margin-top:18px}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sec-head h2{font-size:19px;font-weight:800;margin:0;display:flex;align-items:center;gap:9px}
+.sec-head .em{font-size:20px}
+.sec-head .vall{margin-left:auto;color:var(--amber);font-weight:800;font-size:14px;cursor:pointer}
+.sec-head .vall:hover{text-decoration:underline}
+.sec-sub{color:var(--ink-faint);font-size:13px;font-weight:700}
+
+/* learning path */
+.path-row{display:flex;gap:14px;overflow-x:auto;padding:2px 2px 12px}
+.lesson{flex:0 0 165px;width:165px;background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:16px 15px;cursor:pointer;position:relative;transition:.15s}
+.lesson:hover{transform:translateY(-3px);border-color:#473a2a;background:var(--card-hi)}
+.lesson.current{border-color:var(--amber);box-shadow:0 0 0 1.5px var(--amber),0 0 24px rgba(244,183,64,.30)}
+.lesson .step{position:absolute;top:11px;left:13px;width:24px;height:24px;border-radius:50%;
+  background:var(--amber);color:#3a2906;font-weight:900;font-size:13px;display:grid;place-items:center}
+.lesson .lock{position:absolute;top:13px;right:14px;color:var(--ink-faint);font-size:15px}
+.lesson .licon{font-size:38px;text-align:center;margin:14px 0 12px;line-height:1}
+.lesson .licon-img{height:52px;width:auto;display:block;margin:-3px auto -1px}
+.lesson .lt{font-weight:800;font-size:15px;text-align:center;margin-bottom:3px}
+.lesson .lc{font-size:12px;color:var(--ink-faint);text-align:center;font-weight:700;margin-bottom:10px}
+.lesson.locked{opacity:.62}
+.encourage{flex:0 0 200px;width:200px;background:linear-gradient(180deg,#2d2519,#231c12);
+  border:1px solid #483920;border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:8px}
+.encourage .et{font-weight:800;font-size:14px}
+.encourage .mini{width:74px;height:74px}
+
+/* key phrases */
+.phrase-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:13px}
+.phrase{background:var(--cream);color:var(--cream-ink);border-radius:16px;padding:15px 16px;position:relative}
+.phrase .star{position:absolute;top:11px;right:12px;font-size:16px;color:#bcae90;cursor:pointer;line-height:1}
+.phrase .star.on{color:var(--amber-deep)}
+.phrase .zh{font-size:25px;font-weight:700;line-height:1.2}
+.phrase .py{font-weight:800;color:#8a7a55;font-size:15px;margin-top:3px}
+.phrase .en{color:#6c5f48;font-size:13px;margin-top:1px;font-weight:600}
+.speak{margin-top:11px;width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;
+  background:#2c2419;color:#f5efe5;display:grid;place-items:center;transition:.15s}
+.speak:hover{background:#403524;transform:scale(1.07)}
+.speak svg{width:17px;height:17px;fill:currentColor}
+.streak{background:linear-gradient(180deg,#2d2518,#231c12);border:1px solid #483920;border-radius:16px;
+  padding:15px 16px;display:flex;flex-direction:column;gap:2px;position:relative;justify-content:center}
+.streak .sk-t{font-weight:800;font-size:14px;display:flex;align-items:center;gap:6px}
+.streak .sk-n{font-size:34px;font-weight:900;color:var(--amber);line-height:1.05}
+.streak .sk-n small{font-size:15px;color:var(--ink-soft);font-weight:800}
+.streak .sk-s{font-size:12px;color:var(--ink-soft);font-weight:700;margin-top:2px}
+.streak .mini{position:absolute;right:10px;bottom:8px;width:58px;height:58px;opacity:.95}
+
+/* progress stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:13px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px}
+.stat .sv{font-size:26px;font-weight:900}
+.stat .sl{font-size:13px;color:var(--ink-soft);font-weight:700;margin-top:2px}
+.stat .em{font-size:18px}
+
+/* culture tip strip */
+.tip-strip{margin-top:26px;background:linear-gradient(90deg,#251b10,#1b150d);border:1px solid #3a2d1a;
+  border-radius:16px;padding:14px 18px;display:flex;gap:14px;align-items:center}
+.tip-strip .bulb{flex:0 0 auto;font-size:22px}
+.tip-strip b{color:var(--amber)}
+.tip-strip p{margin:0;color:var(--ink-soft);font-size:13.5px;line-height:1.55}
+
+/* tones */
+.tones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tone{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 12px;text-align:center}
+.tone .ma{font-family:'Noto Sans TC',sans-serif;font-size:30px;font-weight:700;line-height:1}
+.tone svg{display:block;margin:6px auto 8px}
+.tone .nm{font-weight:800;color:var(--amber);font-size:14px}
+.tone .ms{font-size:12px;color:var(--ink-faint);margin-top:4px;line-height:1.45}
+
+/* pair & num grids */
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(74px,1fr));gap:10px}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px}
+.cell .zh-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cell .zh-sm{font-size:21px;font-weight:700}
+.cell .py{color:var(--red);font-weight:800;font-size:15px}
+.cell .en{color:var(--ink-soft);font-size:13px;margin-top:1px}
+.num-cell{display:flex;flex-direction:column;align-items:center;gap:2px;padding:11px 4px}
+.num-cell .digit{font-size:11px;font-weight:800;color:var(--ink-faint)}
+.num-cell .digit-zh{font-size:24px;font-weight:700}
+.num-cell .py{color:var(--red);font-weight:800;font-size:14px}
+.full{grid-column:1/-1}
+
+/* food vocab cards */
+.foodgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:13px}
+.subhead{display:flex;align-items:center;gap:9px;margin:22px 0 12px;font-weight:800;font-size:16px}
+.subhead .pill{font-size:12px;color:var(--ink-faint);font-weight:700}
+.food{display:flex;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:14px 16px;transition:.15s}
+.food:hover{transform:translateY(-2px);border-color:#473a2a}
+.food .emoji{font-size:32px;flex:0 0 auto;line-height:1.1}
+.food .body{flex:1;min-width:0}
+.food .zh-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.food .zh{font-size:23px;font-weight:700;line-height:1.2}
+.food .py{color:var(--red);font-weight:800;font-size:16px;margin-top:2px}
+.food .nm{color:var(--ink-soft);font-size:13px}
+.food .tip{font-size:13px;margin-top:9px;line-height:1.55}
+.food .desc{font-size:12px;color:var(--ink-faint);margin-top:6px;line-height:1.5}
+.badge-say{display:inline-block;font-size:11px;font-weight:800;color:var(--green);background:var(--green-soft);
+  padding:1px 7px;border-radius:7px;margin-right:5px}
+.tag-hk{font-size:11px;font-weight:800;color:var(--amber);background:var(--amber-soft);padding:2px 8px;border-radius:7px}
+.food .speak{margin-top:0;width:32px;height:32px;flex:0 0 auto;align-self:flex-start}
+
+/* culture notes */
+.notes{display:grid;gap:11px}
+.note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--amber);
+  border-radius:12px;padding:12px 15px;font-size:13.5px;color:var(--ink-soft);line-height:1.6}
+.note b{color:var(--ink)}
+
+footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:13px}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width:880px){
+  .app{flex-direction:column}
+  .sidebar{position:static;height:auto;width:100%;flex-basis:auto;flex-direction:row;flex-wrap:wrap;
+    align-items:center;gap:12px;border-right:none;border-bottom:1px solid var(--line);padding:14px}
+  .tagline{display:none}
+  .brand{flex:1 1 auto}
+  .nav{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;order:3;flex-basis:100%;gap:6px}
+  .nav a{white-space:nowrap;padding:8px 10px}
+  .nav a span.tx{display:none}
+  .goal{display:none}
+  .main-wrap{padding:16px 14px 40px}
+  .hero-art{opacity:.5;width:62%}
+  .hero-content{max-width:none;padding:24px}
+}
+@media (max-width:560px){
+  .foodgrid{grid-template-columns:1fr}
+  .phrase-row{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .phrase .zh{font-size:22px}
+}
+
+/* ---------------- LESSON PAGE ---------------- */
+.crumb{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--ink-soft);margin-bottom:14px;flex-wrap:wrap}
+.crumb a{color:var(--ink-soft);cursor:pointer}
+.crumb a:hover{color:var(--amber)}
+.crumb b{color:var(--ink)}
+.crumb .c-zh{color:var(--ink-faint);font-weight:700;margin-left:5px;font-family:'Noto Sans TC',sans-serif}
+.lp-banner{position:relative;overflow:hidden;border-radius:var(--radius-lg);min-height:168px;
+  background:radial-gradient(130% 140% at 86% 0%,#3d2614 0%,#241710 50%,#140d09 100%);
+  border:1px solid #33271a;display:flex;align-items:center;gap:14px;padding:24px 30px}
+.lp-lights{position:absolute;inset:0;pointer-events:none}
+.lp-lights i{position:absolute;width:9px;height:9px;border-radius:50%;background:#ffba63;box-shadow:0 0 14px 5px rgba(255,140,60,.45)}
+.lp-banner-inner{position:relative;z-index:2;flex:1;min-width:0}
+.lp-mod{color:#ffd9a0;font-weight:800;font-size:13px;letter-spacing:.05em;text-transform:uppercase}
+.lp-banner h1{font-family:'Noto Sans TC',sans-serif;font-weight:900;font-size:clamp(23px,3vw,33px);margin:.12em 0 .55em;line-height:1.15;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.lp-banner h1 .lp-zh{font-size:.6em;color:#f3c48f;font-weight:700;margin-left:8px}
+.lp-prog{max-width:430px}
+.lp-prog span{font-size:13px;color:#e8d6c2;font-weight:700;display:block;margin-bottom:7px}
+.lp-art{position:relative;z-index:2;display:flex;align-items:flex-end;gap:4px;flex:0 0 auto}
+.lp-icon{height:92px;width:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.45))}
+.lp-mascot{width:70px;height:70px;margin-bottom:2px}
+.lp-emoji{font-size:66px;line-height:1;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+.lp-intro{color:var(--ink-soft);font-size:14px;line-height:1.6;max-width:640px;margin:-2px 0 14px}
+.lp-body{display:grid;grid-template-columns:minmax(0,1fr) 232px;gap:20px;margin-top:8px;align-items:start}
+.lp-main{min-width:0}
+.lp-main .subhead:first-child{margin-top:10px}
+.lp-rail{display:flex;flex-direction:column;gap:14px;position:sticky;top:14px}
+.lp-rail .streak,.lp-rail .encourage{flex:0 0 auto;width:auto}
+.lp-tip{background:linear-gradient(180deg,#251b10,#1b150d);border:1px solid #3a2d1a;border-radius:16px;padding:14px 16px;font-size:13px;color:var(--ink-soft);line-height:1.55}
+.lp-tip b{color:var(--amber);display:block;margin-bottom:5px}
+.optgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:11px}
+.opt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.opt.opt-def{border-color:#54421f}
+.opt-head{display:flex;align-items:center;gap:8px}
+.opt-zh{font-size:22px;font-weight:700;line-height:1.2;font-family:'Noto Sans TC',sans-serif}
+.opt-lvl{font-size:11px;font-weight:800;color:var(--amber);background:var(--amber-soft);padding:2px 8px;border-radius:7px;white-space:nowrap}
+.opt .py{color:var(--red);font-weight:800;font-size:15px;margin-top:3px}
+.opt-en{font-size:13px;color:var(--ink);font-weight:700;margin-top:1px}
+.opt-deftag{font-size:10px;font-weight:800;color:var(--gold-text);background:#3a2d18;padding:1px 6px;border-radius:6px;margin-left:5px;text-transform:uppercase}
+.opt-alt{font-size:12px;color:var(--ink-faint);margin-top:4px}
+.opt-tip{font-size:12px;color:var(--ink-soft);margin-top:6px;line-height:1.5}
+.opt .opt-spk{margin:0 0 0 auto;width:30px;height:30px;flex:0 0 auto}
+@media (max-width:880px){
+  .lp-body{grid-template-columns:1fr}
+  .lp-rail{flex-direction:row;flex-wrap:wrap;position:static}
+  .lp-rail .streak,.lp-rail .encourage,.lp-tip{flex:1 1 200px}
+  .lp-art .lp-icon{height:72px}
+}
+@media (max-width:560px){ .optgrid{grid-template-columns:1fr 1fr} }
+
+/* ---------------- NAME MODAL ---------------- */
+.name-modal{position:fixed;inset:0;z-index:1000;background:rgba(10,8,6,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+.name-card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px 26px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.name-card .nm-mascot{width:84px;height:84px}
+.name-card h2{font-family:'Noto Sans TC',sans-serif;font-weight:900;font-size:24px;margin:6px 0 4px}
+.name-card p{color:var(--ink-soft);font-size:14px;margin:0 0 16px}
+.name-card input{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink);font-size:16px;font-family:inherit;margin-bottom:14px;text-align:center}
+.name-card input:focus{outline:none;border-color:var(--amber)}
+.name-card .btn-primary{width:100%;justify-content:center}
+
+/* ---------------- MY VOCABULARY (SRS) ---------------- */
+.vbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:16px 0 14px}
+.vbar .vhint{color:var(--ink-faint);font-size:13px}
+.vadd{display:flex;gap:8px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:16px}
+.vadd input{flex:1 1 140px;min-width:0;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink);font-family:inherit;font-size:15px}
+.vadd input:focus{outline:none;border-color:var(--amber)}
+.vadd .vaddbtn{flex:0 0 auto}
+.vocab-list{display:grid;gap:10px}
+.vempty{color:var(--ink-faint);text-align:center;padding:28px;border:1px dashed var(--line);border-radius:14px}
+.vrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.vrow .vmain{flex:1;min-width:0}
+.vzh-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.vzh{font-size:22px;font-weight:700;font-family:'Noto Sans TC',sans-serif}
+.vrow .vpy{color:var(--red);font-weight:800;font-size:14px;margin-top:2px}
+.vrow .ven{color:var(--ink-soft);font-size:13px}
+.vrow .vspk{margin:0;width:30px;height:30px;flex:0 0 auto}
+.vbadge{font-size:11px;font-weight:800;color:var(--ink-faint);background:var(--panel-2);border:1px solid var(--line);padding:1px 8px;border-radius:7px}
+.vbadge.vdue{color:var(--amber);background:var(--amber-soft);border-color:#5a4716}
+.vbadge.vnew{color:var(--green);background:var(--green-soft);border-color:#1c4a2e}
+.vdel{flex:0 0 auto;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink-faint);cursor:pointer;font-size:14px}
+.vdel:hover{color:var(--red);border-color:var(--red)}
+.review-modal{position:fixed;inset:0;z-index:1100;background:rgba(10,8,6,.82);display:flex;align-items:center;justify-content:center;padding:20px}
+.review-card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius-lg);padding:30px 26px;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.rcount{color:var(--ink-faint);font-size:13px;font-weight:700;margin-bottom:14px}
+.rzh{font-size:48px;font-weight:700;font-family:'Noto Sans TC',sans-serif;line-height:1.1}
+.rspk{margin:12px auto 0;width:40px;height:40px}
+.rback{margin-top:16px}
+.rpy{color:var(--red);font-weight:800;font-size:22px}
+.ren{color:var(--ink-soft);font-size:16px;margin-top:4px}
+.ractions{margin-top:20px}
+.ractions .rshow{width:100%;justify-content:center}
+.rrate{display:flex;gap:10px;margin-top:18px}
+.rbtn{flex:1;border:none;border-radius:12px;padding:12px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit}
+.rbtn.ragain{background:var(--red-soft);color:var(--red)}
+.rbtn.rgood{background:var(--amber-soft);color:var(--amber)}
+.rbtn.reasy{background:var(--green-soft);color:var(--green)}
+.rbtn:hover{filter:brightness(1.25)}
+@media (max-width:560px){.vadd input{flex-basis:100%}}
+</style>
+</head>
+<body>
+
+<!-- reusable SVG mascot + boba -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mochi" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="105" rx="33" ry="6.5" fill="rgba(0,0,0,.22)"/>
+    <ellipse cx="20" cy="60" rx="9" ry="7" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <ellipse cx="100" cy="72" rx="9" ry="7" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <rect x="22" y="28" width="76" height="72" rx="33" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <ellipse cx="47" cy="62" rx="5" ry="7" fill="#4a3f39"/>
+    <ellipse cx="73" cy="62" rx="5" ry="7" fill="#4a3f39"/>
+    <circle cx="48.6" cy="59" r="1.7" fill="#fff"/>
+    <circle cx="74.6" cy="59" r="1.7" fill="#fff"/>
+    <circle cx="37" cy="74" r="6" fill="#f4a9a0" opacity=".8"/>
+    <circle cx="83" cy="74" r="6" fill="#f4a9a0" opacity=".8"/>
+    <path d="M52 76 Q60 84 68 76" fill="none" stroke="#4a3f39" stroke-width="2.6" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="mochi-wave" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="105" rx="33" ry="6.5" fill="rgba(0,0,0,.22)"/>
+    <ellipse cx="20" cy="66" rx="9" ry="7" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <g transform="rotate(18 100 60)"><ellipse cx="104" cy="40" rx="8" ry="10" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/></g>
+    <rect x="22" y="28" width="76" height="72" rx="33" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <ellipse cx="47" cy="60" rx="5" ry="7" fill="#4a3f39"/>
+    <ellipse cx="73" cy="60" rx="5" ry="7" fill="#4a3f39"/>
+    <circle cx="48.6" cy="57" r="1.7" fill="#fff"/>
+    <circle cx="74.6" cy="57" r="1.7" fill="#fff"/>
+    <circle cx="37" cy="73" r="6" fill="#f4a9a0" opacity=".8"/>
+    <circle cx="83" cy="73" r="6" fill="#f4a9a0" opacity=".8"/>
+    <path d="M50 72 Q60 84 70 72 Q60 80 50 72Z" fill="#c75b50"/>
+    <path d="M112 28 q4 -3 3 -8 M117 35 q5 -2 6 -7" fill="none" stroke="#ffd27a" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="mochi-cheer" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="105" rx="33" ry="6.5" fill="rgba(0,0,0,.22)"/>
+    <g transform="rotate(-22 24 56)"><ellipse cx="18" cy="40" rx="8" ry="10" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/></g>
+    <g transform="rotate(22 96 56)"><ellipse cx="102" cy="40" rx="8" ry="10" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/></g>
+    <rect x="22" y="30" width="76" height="70" rx="33" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <path d="M41 60 Q47 54 53 60" fill="none" stroke="#4a3f39" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M67 60 Q73 54 79 60" fill="none" stroke="#4a3f39" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="36" cy="74" r="6" fill="#f4a9a0" opacity=".8"/>
+    <circle cx="84" cy="74" r="6" fill="#f4a9a0" opacity=".8"/>
+    <path d="M50 70 Q60 84 70 70 Q60 78 50 70Z" fill="#c75b50"/>
+    <g stroke="#ffd27a" stroke-width="2" stroke-linecap="round"><path d="M14 22 v6 M11 25 h6"/><path d="M106 20 v6 M103 23 h6"/></g>
+  </symbol>
+  <symbol id="mochi-flag" viewBox="0 0 120 120">
+    <ellipse cx="60" cy="105" rx="33" ry="6.5" fill="rgba(0,0,0,.22)"/>
+    <ellipse cx="20" cy="66" rx="9" ry="7" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <line x1="96" y1="84" x2="104" y2="30" stroke="#9a7b53" stroke-width="3" stroke-linecap="round"/>
+    <path d="M104 32 L120 37 L104 46 Z" fill="#e2574c"/>
+    <path d="M110 36 l1.2 2.6 2.9 .2 -2.2 1.8 .8 2.8 -2.5 -1.6 -2.5 1.6 .8 -2.8 -2.2 -1.8 2.9 -.2Z" fill="#ffd27a"/>
+    <ellipse cx="98" cy="78" rx="8" ry="7" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <rect x="22" y="28" width="76" height="72" rx="33" fill="#fbf3e6" stroke="#e7d6bd" stroke-width="2"/>
+    <ellipse cx="47" cy="62" rx="5" ry="7" fill="#4a3f39"/>
+    <ellipse cx="73" cy="62" rx="5" ry="7" fill="#4a3f39"/>
+    <circle cx="48.6" cy="59" r="1.7" fill="#fff"/>
+    <circle cx="74.6" cy="59" r="1.7" fill="#fff"/>
+    <circle cx="37" cy="74" r="6" fill="#f4a9a0" opacity=".8"/>
+    <circle cx="83" cy="74" r="6" fill="#f4a9a0" opacity=".8"/>
+    <path d="M52 76 Q60 83 68 76" fill="none" stroke="#4a3f39" stroke-width="2.6" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="boba" viewBox="0 0 60 84">
+    <line x1="40" y1="6" x2="33" y2="40" stroke="#e2574c" stroke-width="6" stroke-linecap="round"/>
+    <rect x="11" y="20" width="38" height="9" rx="4" fill="#f1e7d4"/>
+    <path d="M14 29 H46 L42 74 Q41 79 36 79 H24 Q19 79 18 74 Z" fill="#d8b48a"/>
+    <circle cx="24" cy="70" r="3.4" fill="#3a2f22"/><circle cx="32" cy="72" r="3.4" fill="#3a2f22"/>
+    <circle cx="40" cy="70" r="3.4" fill="#3a2f22"/><circle cx="28" cy="64" r="3.4" fill="#3a2f22"/>
+    <circle cx="36" cy="64" r="3.4" fill="#3a2f22"/>
+  </symbol>
+</svg>
+
+<div class="app">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">🏮</div>
+      <div><div class="bname">Taiwan Night<br>Market Chinese</div></div>
+    </div>
+    <p class="tagline">Learn like a local,<br>speak with confidence!</p>
+    <nav class="nav" id="nav">
+      <a href="#top" class="active" data-target="top" data-spy="top"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span><span class="tx">Home</span></a>
+      <a href="#vocab" data-view="vocab" data-spy="path"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M18 17H6"/></svg></span><span class="tx">Vocabulary</span></a>
+    </nav>
+    <div class="goal">
+      <img class="boba" src="assets/boba.png" alt="Bubble tea" />
+      <div class="gt">Today's Goal</div>
+      <div class="gs">Learn 15 new words!</div>
+      <div class="bar"><i id="sideGoalBar" style="width:0%"></i></div>
+      <div class="gn" id="sideGoalNum">0 / 15</div>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main" id="top">
+    <div class="main-wrap">
+
+    <div class="topbar">
+      <div class="points"><span class="star">★</span> <span id="topPoints">0</span></div>
+      <div class="avatar"><svg viewBox="0 0 120 120"><use href="#mochi"/></svg></div>
+    </div>
+
+    <div id="dashboard">
+    <!-- HERO -->
+    <section class="hero">
+      <canvas id="herofx" aria-hidden="true"></canvas>
+      <div class="hero-art">
+        <svg viewBox="0 0 460 300" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+          <!-- string lights -->
+          <path d="M0 34 Q120 60 240 36 T460 40" fill="none" stroke="#5a4a3a" stroke-width="1.5"/>
+          <g fill="#ffd27a">
+            <circle cx="60" cy="48" r="4"/><circle cx="140" cy="50" r="4"/><circle cx="220" cy="44" r="4"/>
+            <circle cx="300" cy="46" r="4"/><circle cx="380" cy="48" r="4"/><circle cx="440" cy="46" r="4"/>
+          </g>
+          <!-- hanging lantern -->
+          <g transform="translate(150,40)">
+            <line x1="0" y1="0" x2="0" y2="14" stroke="#5a4a3a" stroke-width="1.5"/>
+            <rect x="-7" y="14" width="14" height="4" rx="1" fill="#e0a01f"/>
+            <ellipse cx="0" cy="30" rx="13" ry="15" fill="#e2574c"/>
+            <ellipse cx="0" cy="30" rx="13" ry="15" fill="none" stroke="#b5392f" stroke-width="1"/>
+            <rect x="-7" y="42" width="14" height="4" rx="1" fill="#e0a01f"/>
+            <line x1="0" y1="46" x2="0" y2="54" stroke="#e0a01f" stroke-width="2"/>
+          </g>
+          <!-- stall roof -->
+          <path d="M250 120 L300 92 L460 92 L460 120 Z" fill="#3a2a3a"/>
+          <rect x="300" y="118" width="160" height="8" fill="#2a1f2e"/>
+          <!-- sign board -->
+          <rect x="312" y="132" width="132" height="40" rx="7" fill="#2a1322" stroke="#e2574c" stroke-width="2"/>
+          <text x="378" y="160" text-anchor="middle" font-family="'Noto Sans TC',sans-serif" font-weight="900" font-size="26" fill="#ff6f5e">台灣夜市</text>
+          <!-- counter -->
+          <rect x="262" y="214" width="198" height="76" rx="6" fill="#6b4a2e"/>
+          <rect x="262" y="214" width="198" height="12" fill="#7d5836"/>
+          <!-- jars -->
+          <rect x="284" y="184" width="20" height="30" rx="4" fill="#f0b24a" opacity=".9"/>
+          <rect x="310" y="188" width="20" height="26" rx="4" fill="#e2574c" opacity=".85"/>
+          <!-- bowl + steam -->
+          <path d="M344 196 q22 0 22 0 a22 9 0 0 1 -22 9 a22 9 0 0 1 -22 -9 q22 0 22 0Z" fill="#cfcad6"/>
+          <ellipse cx="344" cy="196" rx="22" ry="6" fill="#e8b04a"/>
+          <path d="M338 188 q-4 -6 0 -12" fill="none" stroke="#cbb9a0" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          <path d="M350 188 q4 -6 0 -12" fill="none" stroke="#cbb9a0" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          <!-- mascot peeking -->
+          <g transform="translate(372,196) scale(0.92)"><use href="#mochi-wave"/></g>
+        </svg>
+      </div>
+      <div class="hero-content">
+        <div class="hi">Welcome! ♡</div>
+        <h1>Let's explore Taiwan<br>one bite, one word<br>at a time! 🧋🍢</h1>
+        <button class="btn btn-primary" data-target="path">Start Learning <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </section>
+
+    <!-- LEARNING PATH -->
+    <section class="sec" id="path">
+      <div class="sec-head"><h2><span class="em">🗺️</span> Learning Path</h2></div>
+      <div class="path-row" id="pathRow"></div>
+    </section>
+
+    <!-- KEY PHRASES -->
+    <section class="sec" id="phrases">
+      <div class="sec-head"><h2><span class="em">💬</span> Key Phrases</h2></div>
+      <div class="phrase-row" id="phraseRow"></div>
+    </section>
+
+    <!-- MY PROGRESS -->
+    <section class="sec" id="progress">
+      <div class="sec-head"><h2><span class="em">📈</span> My Progress</h2></div>
+      <div class="stats">
+        <div class="stat"><div class="sv"><span id="statGoal">0</span><span style="font-size:15px;color:var(--ink-faint)">/15</span></div><div class="sl"><span class="em">🎯</span> Today's goal</div></div>
+        <div class="stat"><div class="sv" style="color:var(--amber)" id="statStreak">0</div><div class="sl"><span class="em">🔥</span> Day streak</div></div>
+        <div class="stat"><div class="sv" id="statPoints">0</div><div class="sl"><span class="em">⭐</span> Points</div></div>
+        <div class="stat"><div class="sv" id="favCount">0</div><div class="sl"><span class="em">💛</span> Favourites</div></div>
+      </div>
+    </section>
+
+    <!-- CULTURE TIP -->
+    <div class="tip-strip">
+      <span class="bulb">💡</span>
+      <p><b>Cultural tip&nbsp;&nbsp;</b>In Taiwan, night markets are more than food — they're a way of life. Don't be shy: just point, smile, and enjoy! ❤</p>
+    </div>
+
+    <footer>Built for your 10 o'clock lesson · tones double-checked for teaching · 加油！🏮</footer>
+    </div><!-- /dashboard -->
+
+    <div id="lessonView" style="display:none"></div>
+    <div id="vocabView" style="display:none"></div>
+
+    </div><!-- /main-wrap -->
+  </main>
+</div>
+
+<div id="nameModal" class="name-modal" style="display:none">
+  <div class="name-card">
+    <svg class="nm-mascot" viewBox="0 0 120 120"><use href="#mochi-wave"/></svg>
+    <h2>歡迎！Welcome!</h2>
+    <p>What should we call you? 你叫什麼名字？</p>
+    <input id="nameInput" type="text" placeholder="Your name / 你的名字" maxlength="40" autocomplete="off" />
+    <button id="nameGo" class="btn btn-primary">Start learning →</button>
+  </div>
+</div>
+
+<div id="reviewModal" class="review-modal" style="display:none"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ---------------- DATA ---------------- */
+var LESSONS=[
+  {n:1,key:"tones",icon:"🎵",t:"Find the Four Tones",done:0,total:5,cur:true},
+  {n:2,key:"greetings",icon:'<img class="licon-img" src="assets/greetings.png" alt="Saying hello" />',t:"Greetings",done:4,total:11},
+  {n:3,key:"drinks",icon:'<img class="licon-img" src="assets/drinks.png" alt="Bubble tea" />',t:"Drinks & Desserts",done:0,total:8},
+  {n:4,key:"snacks",icon:'<img class="licon-img" src="assets/snacks.png" alt="Skewers" />',t:"Night-Market Snacks",done:0,total:13},
+  {n:5,key:"dishes",icon:'<img class="licon-img" src="assets/dishes.png" alt="Braised pork rice" />',t:"Signature Dishes",done:0,total:7},
+  {n:6,key:"numbers",icon:'<img class="licon-img" src="assets/money.png" alt="Fortune coin" />',t:"Numbers & Money",done:0,total:18}
+];
+var PHRASES=[
+  ["你好","nǐ hǎo","Hello"],["謝謝","xièxie","Thank you"],["不客氣","bú kèqi","You're welcome"],
+  ["多少錢？","duōshao qián?","How much?"],["我要這個","wǒ yào zhège","I want this one"]
+];
+var GREET=[["你好","nǐ hǎo","Hello"],["謝謝","xièxie","Thank you"],["不客氣","bú kèqi","You're welcome"],["再見","zàijiàn","Goodbye"],["對不起","duìbuqǐ","Sorry"],["沒關係","méi guānxi","It's okay"],["老闆","lǎobǎn","“Boss” — call the owner"],["不好意思","bù hǎoyìsi","Excuse me"]];
+var NUMS=[["0","零","líng"],["1","一","yī"],["2","二","èr"],["3","三","sān"],["4","四","sì"],["5","五","wǔ"],["6","六","liù"],["7","七","qī"],["8","八","bā"],["9","九","jiǔ"],["10","十","shí"]];
+var ORDER=[["我要這個","wǒ yào zhège","I want this"],["我要一個這個","wǒ yào yí ge zhège","I want one of this"],["多少錢？","duōshao qián?","How much?"],["會辣嗎？","huì là ma?","Is it spicy?"],["不要辣","bú yào là","Not spicy, please"],["好吃！","hǎochī!","Delicious!"]];
+var SNACKS=[
+["🧆","臭豆腐","chòu dòufu","Stinky tofu","Say 'choh DOH-foo' — 'chòu' rhymes with 'show' (not 'chow') and falls; 'fu' stays light.","Fermented tofu deep-fried until crisp, with pickled cabbage — famous for its smell.",0],
+["🍗","雞排","jī pái","Fried chicken cutlet","Say 'jee PYE' — 'jī' flat high; 'pái' rises like 'pie?'.","A giant breaded deep-fried chicken breast, often bigger than your face.",0],
+["🍗","鹽酥雞","yán sū jī","Salt & pepper chicken","Say 'yen soo jee' — 'yán' rises; 'sū' flat 'soo'; 'jī' flat high.","Bite-sized chicken fried with garlic and basil, tossed in salt and pepper.",0],
+["🍳","蚵仔煎","ô-á-tsian","Oyster omelette","Hokkien 'OR-ah-jian' ('ô' like 'or', no r). The Mandarin reading is rare at stalls.","Oysters in a gooey egg-and-starch pancake with greens and sweet sauce.",1],
+["🍜","蚵仔麵線","ô-á mī-suàⁿ","Oyster vermicelli","Hokkien 'OR-ah MEE-suah' — the final '-suàⁿ' is nasal, hum through the nose.","Thin noodles in a thick brown broth with baby oysters.",1],
+["🍲","大腸麵線","dà cháng miàn xiàn","Intestine vermicelli","Say 'dah chahng myen shyen' — 'cháng' rises; 'xiàn' falls (soft 'sh').","Thin vermicelli in a gloopy broth with braised pork intestines.",0],
+["🥟","胡椒餅","hú jiāo bǐng","Pepper bun","Say 'hoo jyaow bing' — 'hú' rises; 'jiāo' flat (rhymes 'cow'); 'bǐng' dips up.","Peppery pork-and-scallion bun baked on a clay-oven wall till blistered.",0],
+["🫓","蔥油餅","cōng yóu bǐng","Scallion pancake","Say 'tsong yo bing' — 'cōng' starts 'ts' (cats) + 'ong'; 'yóu' rises.","Chewy, flaky pan-fried flatbread layered with scallions.",0],
+["🥪","刈包","guà bāo","Gua bao","Say 'gwah baow' — 'guà' falls; 'bāo' flat high. 刈 reads guà here (Hokkien 'koah').","Folded steamed bun with braised pork belly, pickles, cilantro, peanut powder.",1],
+["🌭","大腸包小腸","dà cháng bāo xiǎo cháng","Sausage-wrapped sausage","Say 'dah chahng baow SHYAOW chahng' — 'big intestine wraps small intestine'.","Grilled pork sausage in a split glutinous-rice sausage 'bun'.",0],
+["🟠","地瓜球","dì guā qiú","Sweet potato balls","Say 'dee gwah chyoh' — 'dì' falls; 'guā' flat; 'qiú' rises (starts 'ch').","Chewy hollow deep-fried sweet-potato dough balls.",0],
+["🍢","花枝丸","huā zhī wán","Cuttlefish balls","Say 'hwah jrr wahn' — 'zhī' a flat 'jrr', tongue curled back; 'wán' rises.","Bouncy minced cuttlefish balls, fried or in soup on a skewer.",0],
+["🍲","滷味","lǔ wèi","Lu wei (braised snacks)","Say 'loo way' — 'lǔ' dips then rises; 'wèi' falls firmly.","Pick-your-own tofu, eggs, veg & meat simmered in soy-spice broth.",0]];
+var DISHES=[
+["🍜","牛肉麵","niú ròu miàn","Beef noodle soup","Say 'nyoh roh myen' — 'niú' rises; 'ròu' falls to 'roh'; 'miàn' to 'myen'.","Braised beef + chewy noodles in rich broth — Taiwan's national dish.",0],
+["🍚","滷肉飯","lǔ ròu fàn","Braised pork rice","Say 'loo roh fahn' — 'lǔ' dips up; 'ròu'='roh' falling; 'fàn' falls.","Chopped fatty pork stewed in soy over rice. Also written 魯肉飯.",0],
+["🥟","小籠包","xiǎo lóng bāo","Soup dumplings","Say 'shyaow long baow' — 'xiǎo' dips; 'lóng' rises; 'bāo' flat high.","Steamed dumplings with pork and a burst of hot soup — Din Tai Fung classic.",0],
+["🍤","擔仔麵","dà zǎi miàn","Danzai noodles","Say 'dah dzigh myen' — read 'dà zǎi' in Taiwan (not 'dahn').","Small bowl of noodles in shrimp broth with minced pork & a shrimp — Tainan.",1],
+["🍗","三杯雞","sān bēi jī","Three-cup chicken","Say 'sahn bay jee' — all three syllables high and level.","Chicken braised in soy, rice wine & sesame oil, finished with Thai basil.",0],
+["🍛","肉燥飯","ròu zào fàn","Minced pork on rice","Say 'roh dzaow fahn' — three downward notes in a row.","Simmered minced-pork sauce over rice — northern cousin of lu rou fan.",0],
+["🍱","便當","biàn dāng","Bento box","Say 'byen dahng' — 'biàn' falls; 'dāng' flat high. From Japanese 'bentō'.","Boxed meal: rice + a pork chop or braised meat plus veg.",0]];
+var DRINKS=[
+["🧋","珍珠奶茶","zhēn zhū nǎi chá","Pearl / bubble milk tea","Say 'jen joo nigh chah' — 'zh' = 'j' tongue curled; 'chá' rises.","Milk tea with chewy tapioca pearls — the original boba.",0],
+["🧋","波霸奶茶","bō bà nǎi chá","Boba milk tea","Say 'baw bah nigh chah' — 'bō' flat high (no 'w' glide); 'bà' falls.","Milk tea with extra-large pearls — 'boba' that went worldwide.",0],
+["🥭","芒果冰","máng guǒ bīng","Mango shaved ice","Say 'mahng gwaw bing' — 'máng' rises; 'guǒ' dips up; 'bīng' flat.","Shaved ice piled with fresh mango, syrup & ice cream.",0],
+["🍧","雪花冰","xuě huā bīng","Snowflake ice","Say 'shweh hwah bing' — round your lips for the 'ü' in 'xuě'.","Ribbons of milk ice shaved so fine they melt on the tongue.",0],
+["🍮","豆花","dòu huā","Tofu pudding","Say 'doh hwah' — 'dòu' rhymes with 'dough'; 'huā' flat high. Hokkien 'tāu-hue'.","Silky soft tofu in sweet syrup with peanuts, taro balls or red beans.",0],
+["🍵","燒仙草","shāo xiān cǎo","Hot grass jelly","Say 'shaow shyen tsaow' — 'cǎo' starts 'ts' (cats) then 'aow'.","Warm grass-jelly dessert with taro balls, red beans & peanuts.",0],
+["🍋","愛玉","ài yù","Aiyu jelly","Say 'eye yoo' — 'ài' like 'eye' falls; 'yù' = 'yoo' rounded lips.","Translucent fig-seed jelly with lemon & honey — super refreshing.",1],
+["🍍","鳳梨酥","fèng lí sū","Pineapple cake","Say 'fung lee soo' — 'fèng' falls; 'lí' rises; 'sū' crisp 'soo'.","Buttery pastry filled with pineapple jam — Taiwan's souvenir snack.",0]];
+
+/* drink & food customization (web-verified) — most→least sugar/ice, least→most spice */
+var SUGAR=[
+  {zh:"全糖",py:"quán táng",en:"Full sugar",lvl:"100%",alt:"正常糖",def:true,tip:"'chwen tahng', both rising. The default if you say nothing."},
+  {zh:"少糖",py:"shǎo táng",en:"Less sugar",lvl:"70%",alt:"七分糖 qī fēn",tip:"'shaow tahng' — shǎo dips then rises."},
+  {zh:"半糖",py:"bàn táng",en:"Half sugar",lvl:"50%",alt:"五分糖 wǔ fēn",tip:"'bahn tahng' — bàn falls sharply. Very popular."},
+  {zh:"微糖",py:"wéi táng",en:"Light sugar",lvl:"30%",alt:"三分糖 sān fēn",tip:"'way tahng' — wéi rises."},
+  {zh:"無糖",py:"wú táng",en:"No sugar",lvl:"0%",alt:"不加糖 bù jiā táng",tip:"'woo tahng' — wú rises. No added sugar at all."}
+];
+var ICE=[
+  {zh:"多冰",py:"duō bīng",en:"Extra ice",lvl:"Extra",alt:"加冰",tip:"'dwaw bing' — the most ice. Rarely ordered."},
+  {zh:"正常冰",py:"zhèng cháng bīng",en:"Normal ice",lvl:"Default",alt:"全冰 quán bīng",def:true,tip:"'jung-chang bing' — the default if you say nothing."},
+  {zh:"少冰",py:"shǎo bīng",en:"Less ice",lvl:"~70%",alt:"",tip:"'shaow bing' — a bit less, but often still fairly icy."},
+  {zh:"微冰",py:"wéi bīng",en:"Light ice",lvl:"~30%",alt:"",tip:"'way bing' — just a little ice."},
+  {zh:"去冰",py:"qù bīng",en:"No ice (still cold)",lvl:"No ice",alt:"",tip:"'chyu bing' — cold drink; shops may still add a little crushed ice."},
+  {zh:"完全去冰",py:"wánquán qù bīng",en:"Zero ice (still cold)",lvl:"0 ice",alt:"",tip:"'wan-chwen chyu bing' — truly no ice. Say this for absolutely none."},
+  {zh:"常溫",py:"cháng wēn",en:"Room temperature",lvl:"🌡 room",alt:"室溫 shì wēn",tip:"'chang wun' — no ice, no heating. ≠ 完全去冰 (that's still chilled)."},
+  {zh:"溫",py:"wēn",en:"Warm",lvl:"🌡 warm",alt:"",tip:"'wun' — lukewarm, meant to sip right away."},
+  {zh:"熱",py:"rè",en:"Hot",lvl:"🌡 hot",alt:"全熱 quán rè",tip:"'ruh' — served hot. Usually only teas & milk teas."}
+];
+var SPICE=[
+  {zh:"不辣",py:"bú là",en:"Not spicy",lvl:"—",alt:"原味 yuán wèi",def:true,tip:"'boo lah' — 不 becomes bú before 辣. The default if you say nothing."},
+  {zh:"微辣",py:"wéi là",en:"Slightly spicy",lvl:"🌶",alt:"",tip:"'way lah' — below 小辣; not every stall offers it."},
+  {zh:"小辣",py:"xiǎo là",en:"Mild",lvl:"🌶",alt:"",tip:"'shyaow lah' — the most popular, safe everyday choice."},
+  {zh:"中辣",py:"zhōng là",en:"Medium",lvl:"🌶🌶",alt:"",tip:"'jong lah' — a solid, noticeable heat."},
+  {zh:"大辣",py:"dà là",en:"Very spicy",lvl:"🌶🌶🌶",alt:"",tip:"'dah lah' — the top level at most stalls."},
+  {zh:"特辣",py:"tè là",en:"Extra hot",lvl:"🌶🌶🌶🌶",alt:"超辣 chāo là",tip:"'tuh lah' — hottest tier, only some stalls offer it."}
+];
+var TONES=[
+  {ma:"mā",say:"媽",nm:"Tone 1 · high & flat",ms:"“mother” 媽 — a high, steady note.",path:'<path d="M7 7 H57" fill="none" stroke="#f4b740" stroke-width="3" stroke-linecap="round"/>'},
+  {ma:"má",say:"麻",nm:"Tone 2 · rising",ms:"“hemp” 麻 — rises like “huh?”",path:'<path d="M7 21 L57 6" fill="none" stroke="#f4b740" stroke-width="3" stroke-linecap="round"/>'},
+  {ma:"mǎ",say:"馬",nm:"Tone 3 · dipping",ms:"“horse” 馬 — dip down then up.",path:'<path d="M7 9 L24 21 L57 7" fill="none" stroke="#f4b740" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'},
+  {ma:"mà",say:"罵",nm:"Tone 4 · falling",ms:"“to scold” 罵 — a sharp drop.",path:'<path d="M7 6 L57 21" fill="none" stroke="#f4b740" stroke-width="3" stroke-linecap="round"/>'},
+  {ma:"ma",say:"嗎",nm:"Neutral · light",ms:"particle 嗎 — toneless, floaty.",path:'<circle cx="32" cy="13" r="4" fill="#857d72"/>'}
+];
+
+/* ---------------- RENDER ---------------- */
+var SPK='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+function esc(s){return s;}
+function pct(d,t){return Math.round(d/t*100);}
+
+function renderPath(){
+document.getElementById('pathRow').innerHTML = LESSONS.map(function(l){
+  var d=lessonDone(l.key),tt=lessonTotal(l.key);
+  return '<div class="lesson'+(l.cur?' current':'')+'" data-lesson="'+l.key+'">'+
+    '<div class="step">'+l.n+'</div>'+
+    '<div class="licon">'+l.icon+'</div><div class="lt">'+l.t+'</div>'+
+    '<div class="lc">'+d+' / '+tt+'</div>'+
+    '<div class="bar"><i style="width:'+pct(d,tt)+'%"></i></div></div>';
+}).join('') + '<div class="encourage"><svg class="mini" viewBox="0 0 120 120"><use href="#mochi-cheer"/></svg><div class="et">Keep going!<br>You\'re doing<br>great ⭐</div></div>';
+}
+
+document.getElementById('phraseRow').innerHTML = PHRASES.map(function(p){
+  return '<div class="phrase"><span class="star" data-fav="'+p[0]+'">☆</span>'+
+    '<div class="zh" lang="zh-Hant">'+p[0]+'</div><div class="py">'+p[1]+'</div><div class="en">'+p[2]+'</div>'+
+    '<button class="speak" data-say="'+p[0]+'" aria-label="Listen">'+SPK+'</button></div>';
+}).join('') +
+'<div class="streak"><div class="sk-t">Streak <span>🔥</span></div><div class="sk-n"><span class="js-streak">0</span> <small>days</small></div><div class="sk-s js-streak-msg">Start your streak today!</div><svg class="mini" viewBox="0 0 120 120"><use href="#mochi-flag"/></svg></div>';
+
+function pairHTML(a){return '<div class="cell"><div class="zh-row"><span class="zh-sm" lang="zh-Hant">'+a[0]+'</span><button class="speak" style="width:30px;height:30px;margin-top:0" data-say="'+a[0].replace(/[？！]/g,'')+'" aria-label="Listen">'+SPK+'</button></div><div class="py">'+a[1]+'</div><div class="en">'+a[2]+'</div></div>';}
+/* greetings & numbers vocab now live in their Learning Path lesson pages */
+
+function foodHTML(f){
+  return '<article class="food"><div class="emoji">'+f[0]+'</div><div class="body">'+
+    '<div class="zh-row"><span class="zh" lang="zh-Hant">'+f[1]+'</span>'+(f[6]?'<span class="tag-hk">Hokkien</span>':'')+'</div>'+
+    '<div class="py">'+f[2]+'</div><div class="nm">'+f[3]+'</div>'+
+    '<p class="tip"><span class="badge-say">Say it</span>'+f[4]+'</p><p class="desc">'+f[5]+'</p></div>'+
+    '<button class="speak" data-say="'+f[1]+'" aria-label="Listen">'+SPK+'</button></article>';
+}
+/* food vocab now lives in the Drinks / Snacks / Dishes lesson pages */
+
+/* ---------------- LESSON PAGES ---------------- */
+function numHTML(a){return '<div class="cell num-cell"><span class="digit">'+a[0]+'</span><span class="digit-zh" lang="zh-Hant">'+a[1]+'</span><span class="py">'+a[2]+'</span><button class="speak" style="width:26px;height:26px;margin:5px auto 0" data-say="'+a[1]+'" aria-label="Listen">'+SPK+'</button></div>';}
+function counterCell(){return '<div class="cell full"><div class="zh-row"><span class="zh-sm" lang="zh-Hant">一個 · 一杯 · 一碗</span><span class="py" style="font-size:14px">yí ge · yì bēi · yì wǎn</span></div><div class="en" style="margin-top:4px">Counters: 一個 = one item · 一杯 = one cup (drinks) · 一碗 = one bowl (noodles).</div></div>';}
+function optHTML(o){
+  return '<div class="opt'+(o.def?' opt-def':'')+'"><div class="opt-head">'+
+    '<span class="opt-zh" lang="zh-Hant">'+o.zh+'</span>'+(o.lvl?'<span class="opt-lvl">'+o.lvl+'</span>':'')+
+    '<button class="speak opt-spk" data-say="'+o.zh+'" aria-label="Listen">'+SPK+'</button></div>'+
+    '<div class="py">'+o.py+'</div>'+
+    '<div class="opt-en">'+o.en+(o.def?' <span class="opt-deftag">default</span>':'')+'</div>'+
+    (o.alt?'<div class="opt-alt">also: '+o.alt+'</div>':'')+
+    '<div class="opt-tip">'+o.tip+'</div></div>';
+}
+function toneHTML(t){return '<div class="tone"><div class="ma" lang="zh-Hant">'+t.ma+'</div>'+
+  '<svg width="64" height="26" viewBox="0 0 64 26">'+t.path+'</svg>'+
+  '<div class="nm">'+t.nm+'</div><div class="ms">'+t.ms+'</div>'+
+  '<button class="speak" style="margin:9px auto 0" data-say="'+t.say+'" aria-label="Listen">'+SPK+'</button></div>';}
+var LESSON_PAGES={
+  tones:{n:1,title:"Find the Four Tones",zh:"四聲",icon:"🎵",done:0,total:5,
+    tip:"Tones are the first thing to nail — get them right and every word in the other modules becomes easier. Trace the pitch line with your hand as you say each “ma”.",
+    sections:[{kind:"tones",head:"🎵 The four tones (+ a neutral one)",sub:"聲調",intro:"Pitch is part of the word itself. The same syllable “ma” means different things depending on how your voice moves. Tap 🔊 to hear each one.",data:TONES}]},
+  greetings:{n:2,title:"Greetings",zh:"招呼語",icon:"greetings.png",done:4,total:11,
+    tip:"Open with 你好 and a smile; say 謝謝 when you get your food. 老闆 (boss) is the friendly way to get a vendor's attention.",
+    sections:[{kind:"pairs",head:"👋 Greetings & courtesy",sub:"招呼語",data:GREET}]},
+  drinks:{n:3,title:"Drinks & Desserts",zh:"飲料甜點",icon:"drinks.png",done:0,total:8,
+    tip:"When you order a drink the staff ask 甜度?(sugar) and 冰塊?(ice). Combine a level from each — e.g. 半糖少冰 (half sugar, less ice).",
+    sections:[{kind:"food",head:"🧋 Drinks & desserts",sub:"飲料甜點",data:DRINKS},
+              {kind:"opt",head:"🍬 Sugar level 甜度",sub:"most → least",data:SUGAR},
+              {kind:"opt",head:"🧊 Ice level 冰塊",sub:"most → least",data:ICE}]},
+  snacks:{n:4,title:"Night-Market Snacks",zh:"夜市小吃",icon:"snacks.png",done:0,total:13,
+    tip:"For fried snacks like 鹽酥雞 and 滷味 the vendor asks 要辣嗎?(want it spicy?). Reply with a spice level — 小辣 (mild) is the safe favourite.",
+    sections:[{kind:"food",head:"🔥 Night-market snacks",sub:"夜市小吃",data:SNACKS},
+              {kind:"opt",head:"🌶️ Spice level 辣度",sub:"least → most",data:SPICE}]},
+  dishes:{n:5,title:"Signature Dishes",zh:"招牌美食",icon:"dishes.png",done:0,total:7,
+    tip:"These are sit-down favourites. 牛肉麵 (beef noodle soup) is often called Taiwan's national dish.",
+    sections:[{kind:"food",head:"🍜 Signature dishes",sub:"招牌美食",data:DISHES}]},
+  numbers:{n:6,title:"Numbers & Money",zh:"數字 · 點餐",icon:"money.png",done:0,total:18,
+    tip:"Ask 多少錢?(how much). Mandarin puts a counter between the number and the item — 一個 / 一杯 / 一碗.",
+    sections:[{kind:"nums",head:"🔢 Numbers",sub:"數字",data:NUMS},
+              {kind:"pairs",head:"🛒 Ordering",sub:"點餐用語",data:ORDER,counter:true}]}
+};
+function buildLesson(key){
+  var p=LESSON_PAGES[key]; if(!p)return '';
+  var body=p.sections.map(function(s){
+    var grid='';
+    if(s.kind==='pairs')grid='<div class="pairs">'+s.data.map(pairHTML).join('')+(s.counter?counterCell():'')+'</div>';
+    else if(s.kind==='food')grid='<div class="foodgrid">'+s.data.map(foodHTML).join('')+'</div>';
+    else if(s.kind==='nums')grid='<div class="nums">'+s.data.map(numHTML).join('')+'</div>';
+    else if(s.kind==='opt')grid='<div class="optgrid">'+s.data.map(optHTML).join('')+'</div>';
+    else if(s.kind==='tones')grid='<div class="tones">'+s.data.map(toneHTML).join('')+'</div>';
+    return '<div class="subhead"><span>'+s.head+'</span><span class="pill">'+s.sub+'</span></div>'+(s.intro?'<p class="lp-intro">'+s.intro+'</p>':'')+grid;
+  }).join('');
+  var dn=lessonDone(key),tt=lessonTotal(key),p100=pct(dn,tt);
+  var lights='<i style="left:18%;top:24%"></i><i style="left:38%;top:62%"></i><i style="left:60%;top:30%"></i><i style="left:78%;top:64%"></i><i style="left:91%;top:26%"></i>';
+  return '<div class="crumb"><a data-back="path">Learning Path</a><span>›</span><b>'+p.title+'<span class="c-zh">'+p.zh+'</span></b></div>'+
+    '<section class="lp-banner"><div class="lp-lights">'+lights+'</div>'+
+      '<div class="lp-banner-inner"><div class="lp-mod">Module '+p.n+'</div>'+
+        '<h1>'+p.title+'<span class="lp-zh">'+p.zh+'</span></h1>'+
+        '<div class="lp-prog"><span id="lpProgTxt">Progress: '+dn+' of '+tt+' words complete</span><div class="bar"><i id="lpProgBar" style="width:'+p100+'%"></i></div></div></div>'+
+      '<div class="lp-art">'+(/\.png$/.test(p.icon)?'<img class="lp-icon" src="assets/'+p.icon+'" alt="">':'<div class="lp-emoji">'+p.icon+'</div>')+'<svg class="lp-mascot" viewBox="0 0 120 120"><use href="#mochi-wave"/></svg></div>'+
+    '</section>'+
+    '<div class="lp-body"><div class="lp-main">'+body+'</div>'+
+      '<aside class="lp-rail">'+
+        '<div class="streak"><div class="sk-t">Streak <span>🔥</span></div><div class="sk-n"><span class="js-streak">0</span> <small>days</small></div><div class="sk-s js-streak-msg">Start your streak today!</div><svg class="mini" viewBox="0 0 120 120"><use href="#mochi-flag"/></svg></div>'+
+        '<div class="encourage"><svg class="mini" viewBox="0 0 120 120"><use href="#mochi-cheer"/></svg><div class="et">Keep going!<br>You\'re doing<br>great ⭐</div></div>'+
+        '<div class="lp-tip"><b>💡 Cultural tip</b>'+p.tip+'</div>'+
+      '</aside></div>';
+}
+var currentLessonKey=null;
+function openLesson(key){
+  currentLessonKey=key;
+  var html=buildLesson(key); if(!html)return;
+  var lv=document.getElementById('lessonView');
+  lv.innerHTML=html; lv.style.display='block';
+  document.getElementById('dashboard').style.display='none';
+  window.scrollTo(0,0);
+  setActiveNav('path');
+  refreshStats();
+}
+function closeLesson(){
+  currentLessonKey=null;
+  var lv=document.getElementById('lessonView');
+  if(lv && lv.style.display!=='none'){lv.style.display='none';lv.innerHTML='';}
+  var db=document.getElementById('dashboard'); if(db) db.style.display='';
+}
+
+/* ---------------- INTERACTIONS ---------------- */
+function scrollToId(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+document.addEventListener('click',function(e){
+  var vw=e.target.closest('[data-view]');
+  if(vw){if(vw.getAttribute('data-view')==='vocab')openVocab();return;}
+  var lz=e.target.closest('[data-lesson]');
+  if(lz){closeVocab();openLesson(lz.getAttribute('data-lesson'));return;}
+  var bk=e.target.closest('[data-back]');
+  if(bk){closeLesson();closeVocab();scrollToId(bk.getAttribute('data-back'));return;}
+  var add=e.target.closest('.vaddbtn'); if(add){addVocab();return;}
+  var del=e.target.closest('[data-del]'); if(del){VOCAB=VOCAB.filter(function(c){return c.id!==del.getAttribute('data-del');});saveVocab();renderVocab();syncCloud();return;}
+  var rv=e.target.closest('.vreview'); if(rv){startReview();return;}
+  var rs=e.target.closest('.rshow'); if(rs){reviewShow();return;}
+  var rg=e.target.closest('.rbtn[data-grade]'); if(rg){reviewGrade(rg.getAttribute('data-grade'));return;}
+  var t=e.target.closest('[data-target]');
+  if(t){closeLesson();closeVocab();scrollToId(t.getAttribute('data-target'));return;}
+  var sp=e.target.closest('.speak');
+  if(sp){var w=sp.getAttribute('data-say');say(w);if(!e.target.closest('#vocabView,#reviewModal'))recordHeard(w);return;}
+  var fav=e.target.closest('.star');
+  if(fav){toggleFav(fav);return;}
+});
+
+/* speech — prefer a Taiwan (zh-TW) voice; fix known polyphone misreads */
+var synth=window.speechSynthesis;
+if(!synth){document.querySelectorAll('.speak').forEach(function(b){b.style.display='none';});}
+var ZH_VOICE=null;
+function pickVoice(){var vs=(synth&&synth.getVoices())||[];if(!vs.length)return;
+  var byName=['Yating','Hanhan','Zhiwei','HsiaoChen','HsiaoYu'];
+  for(var i=0;i<byName.length;i++){var m=vs.find(function(v){return v.name.indexOf(byName[i])>=0;});if(m){ZH_VOICE=m;return;}}
+  ZH_VOICE=vs.find(function(v){return /zh[-_]?(TW|Hant)|Taiwan|Traditional/i.test(v.lang+' '+v.name);})||vs.find(function(v){return /zh|Chinese|Mandarin/i.test(v.lang+' '+v.name);})||null;
+}
+if(synth){pickVoice();synth.onvoiceschanged=pickVoice;}
+var SAY_FIX={'沒關係':'梅關係'}; /* 沒 here is méi, not mò — feed a homophone so TTS says it right */
+function say(t){if(!synth||!t)return;synth.cancel();var u=new SpeechSynthesisUtterance(SAY_FIX[t]||t);u.lang=(ZH_VOICE&&ZH_VOICE.lang)||'zh-TW';u.rate=0.85;if(ZH_VOICE)u.voice=ZH_VOICE;synth.speak(u);}
+
+/* favourites */
+var FAV={};try{FAV=JSON.parse(localStorage.getItem('tnm_fav')||'{}');}catch(e){FAV={};}
+function refreshFav(){
+  document.querySelectorAll('.star[data-fav]').forEach(function(s){var k=s.getAttribute('data-fav');
+    if(FAV[k]){s.classList.add('on');s.textContent='★';}else{s.classList.remove('on');s.textContent='☆';}});
+  document.getElementById('favCount').textContent=Object.keys(FAV).filter(function(k){return FAV[k];}).length;
+}
+function toggleFav(s){var k=s.getAttribute('data-fav');FAV[k]=!FAV[k];try{localStorage.setItem('tnm_fav',JSON.stringify(FAV));}catch(e){}refreshFav();refreshStats();syncCloud();}
+
+/* ---------------- PROGRESS (local, honest stats — Supabase sync later) ---------------- */
+var GOAL=15;
+function dstr(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+function todayStr(){return dstr(new Date());}
+function yestStr(){var d=new Date();d.setDate(d.getDate()-1);return dstr(d);}
+var PROG;try{PROG=JSON.parse(localStorage.getItem('tnm_prog')||'null');}catch(e){PROG=null;}
+if(!PROG||typeof PROG!=='object')PROG={heard:{},points:0,streak:0,lastActive:'',lastGoalDate:'',dayDate:'',learnedToday:0};
+if(typeof PROG.lastGoalDate!=='string')PROG.lastGoalDate='';
+function saveProg(){try{localStorage.setItem('tnm_prog',JSON.stringify(PROG));}catch(e){}}
+function favCount(){return Object.keys(FAV).filter(function(k){return FAV[k];}).length;}
+function totalPoints(){return PROG.points+favCount()*5;}
+/* streak only counts days the daily word goal was completed */
+function shownStreak(){return (PROG.lastGoalDate===todayStr()||PROG.lastGoalDate===yestStr())?PROG.streak:0;}
+function shownGoal(){return PROG.dayDate===todayStr()?PROG.learnedToday:0;}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+/* per-lesson progress = how many of that lesson's words have been heard */
+function lessonWords(key){var p=LESSON_PAGES[key];var out=[];if(!p)return out;p.sections.forEach(function(s){
+  if(s.kind==='tones')s.data.forEach(function(t){out.push(t.say);});
+  else if(s.kind==='food')s.data.forEach(function(f){out.push(f[1]);});
+  else if(s.kind==='opt')s.data.forEach(function(o){out.push(o.zh);});
+  else if(s.kind==='pairs')s.data.forEach(function(a){out.push(a[0].replace(/[？！]/g,''));});
+  else if(s.kind==='nums')s.data.forEach(function(a){out.push(a[1]);});
+});return out;}
+function lessonTotal(key){return lessonWords(key).length;}
+function lessonDone(key){var c=0;lessonWords(key).forEach(function(w){if(PROG.heard[w])c++;});return c;}
+function updatePathProgress(){document.querySelectorAll('#pathRow .lesson[data-lesson]').forEach(function(card){
+  var k=card.getAttribute('data-lesson'),d=lessonDone(k),tt=lessonTotal(k);
+  var lc=card.querySelector('.lc');if(lc)lc.textContent=d+' / '+tt;
+  var bi=card.querySelector('.bar > i');if(bi)bi.style.width=pct(d,tt)+'%';
+});}
+function refreshStats(){
+  var g=shownGoal(),s=shownStreak(),pts=totalPoints(),fav=favCount();
+  setTxt('topPoints',pts);setTxt('statPoints',pts);setTxt('statGoal',g);setTxt('statStreak',s);setTxt('favCount',fav);
+  setTxt('sideGoalNum',g+' / '+GOAL);
+  var bar=document.getElementById('sideGoalBar');if(bar)bar.style.width=Math.min(100,Math.round(g/GOAL*100))+'%';
+  document.querySelectorAll('.js-streak').forEach(function(e){e.textContent=s;});
+  document.querySelectorAll('.js-streak-msg').forEach(function(e){e.textContent=s>0?'Keep it alive!':'Reach today\'s goal to start!';});
+  updatePathProgress();
+  if(currentLessonKey){var ld=lessonDone(currentLessonKey),lt=lessonTotal(currentLessonKey);setTxt('lpProgTxt','Progress: '+ld+' of '+lt+' words complete');var lpb=document.getElementById('lpProgBar');if(lpb)lpb.style.width=pct(ld,lt)+'%';}
+}
+function recordHeard(word){
+  if(!word)return;
+  var t=todayStr();
+  if(PROG.dayDate!==t){PROG.dayDate=t;PROG.learnedToday=0;}
+  PROG.lastActive=t;
+  if(!PROG.heard[word]){
+    PROG.heard[word]=true;PROG.points+=10;PROG.learnedToday+=1;
+    if(PROG.learnedToday>=GOAL && PROG.lastGoalDate!==t){
+      PROG.streak=(PROG.lastGoalDate===yestStr())?PROG.streak+1:1;
+      PROG.lastGoalDate=t;
+    }
+  }
+  saveProg();refreshStats();syncCloud();
+}
+renderPath();refreshFav();refreshStats();
+
+/* ---------------- MY VOCABULARY (Kotoba-style spaced repetition) ---------------- */
+var VOCAB;try{VOCAB=JSON.parse(localStorage.getItem('tnm_vocab')||'null');}catch(e){VOCAB=null;}
+if(!Array.isArray(VOCAB))VOCAB=[];
+function saveVocab(){try{localStorage.setItem('tnm_vocab',JSON.stringify(VOCAB));}catch(e){}}
+function uid(){return (window.crypto&&crypto.randomUUID)?crypto.randomUUID():'v'+Date.now()+Math.random().toString(16).slice(2,8);}
+function isDue(c){return !c.due || c.due<=todayStr();}
+function dueCount(){return VOCAB.filter(isDue).length;}
+function daysUntil(d){return Math.max(0,Math.round((new Date(d)-new Date(todayStr()))/86400000));}
+function dueLabel(c){if(!c.reps&&!c.interval)return '<span class="vbadge vnew">New</span>';if(isDue(c))return '<span class="vbadge vdue">Due</span>';return '<span class="vbadge">in '+daysUntil(c.due)+'d</span>';}
+function srsRate(c,grade){
+  if(grade==='again'){c.reps=0;c.interval=0;c.ease=Math.max(1.3,(c.ease||2.5)-0.2);}
+  else if(grade==='good'){c.reps=(c.reps||0)+1;c.interval=c.reps===1?1:(c.reps===2?3:Math.max(1,Math.round((c.interval||1)*(c.ease||2.5))));}
+  else {c.reps=(c.reps||0)+1;c.ease=(c.ease||2.5)+0.15;c.interval=Math.max(4,Math.round((c.interval||1)*(c.ease)*1.3));}
+  var d=new Date();d.setDate(d.getDate()+c.interval);c.due=dstr(d);
+}
+function renderVocab(){
+  var lv=document.getElementById('vocabView'); if(!lv)return;
+  var rows=VOCAB.map(function(c){
+    return '<div class="vrow"><div class="vmain"><div class="vzh-row"><span class="vzh" lang="zh-Hant">'+c.zh+'</span>'+
+      '<button class="speak vspk" data-say="'+c.zh+'" aria-label="Listen">'+SPK+'</button>'+dueLabel(c)+'</div>'+
+      (c.py?'<div class="vpy">'+c.py+'</div>':'')+(c.en?'<div class="ven">'+c.en+'</div>':'')+'</div>'+
+      '<button class="vdel" data-del="'+c.id+'" aria-label="Delete">✕</button></div>';
+  }).join('')||'<div class="vempty">No words yet — add your first one above! 加入你想記住的單字。</div>';
+  var due=dueCount();
+  lv.innerHTML=
+    '<div class="crumb"><a data-target="top">Home</a><span>›</span><b>My Vocabulary<span class="c-zh">我的單字</span></b></div>'+
+    '<section class="lp-banner" style="min-height:128px"><div class="lp-lights"><i style="left:20%;top:30%"></i><i style="left:55%;top:62%"></i><i style="left:82%;top:28%"></i></div>'+
+      '<div class="lp-banner-inner"><div class="lp-mod">Spaced repetition</div><h1>My Vocabulary<span class="lp-zh">我的單字</span></h1>'+
+      '<div class="lp-prog"><span>'+VOCAB.length+' word'+(VOCAB.length===1?'':'s')+' · '+due+' due today</span></div></div>'+
+      '<div class="lp-art"><div class="lp-emoji">📚</div><svg class="lp-mascot" viewBox="0 0 120 120"><use href="#mochi-cheer"/></svg></div></section>'+
+    '<div class="vbar"><button class="btn btn-primary vreview"'+(due?'':' disabled')+'>'+(due?('Review '+due+' card'+(due>1?'s':'')+' →'):'Nothing due 🎉')+'</button>'+
+      '<span class="vhint">Add words you want to remember; review daily on a memory curve.</span></div>'+
+    '<div class="vadd"><input id="vAddZh" placeholder="中文 (e.g. 好吃)" maxlength="24" autocomplete="off"><input id="vAddPy" placeholder="pinyin (hǎochī)" maxlength="40" autocomplete="off"><input id="vAddEn" placeholder="meaning (delicious)" maxlength="60" autocomplete="off"><button class="btn btn-primary vaddbtn">+ Add</button></div>'+
+    '<div class="vocab-list">'+rows+'</div>';
+}
+function openVocab(){closeLesson();renderVocab();document.getElementById('vocabView').style.display='block';document.getElementById('dashboard').style.display='none';window.scrollTo(0,0);setActiveNav('path');}
+function closeVocab(){var v=document.getElementById('vocabView');if(v){v.style.display='none';v.innerHTML='';}}
+function addVocab(){var zEl=document.getElementById('vAddZh');if(!zEl)return;var zh=(zEl.value||'').trim();if(!zh)return;
+  VOCAB.push({id:uid(),zh:zh,py:(document.getElementById('vAddPy').value||'').trim(),en:(document.getElementById('vAddEn').value||'').trim(),ease:2.5,interval:0,reps:0,due:todayStr()});
+  saveVocab();renderVocab();syncCloud();}
+var rQueue=[],rIdx=0;
+function startReview(){rQueue=VOCAB.filter(isDue);if(!rQueue.length)return;rIdx=0;document.getElementById('reviewModal').style.display='flex';showReviewCard();}
+function endReview(){document.getElementById('reviewModal').style.display='none';saveVocab();renderVocab();syncCloud();}
+function showReviewCard(){
+  if(rIdx>=rQueue.length){endReview();return;}
+  var c=rQueue[rIdx];
+  document.getElementById('reviewModal').innerHTML=
+    '<div class="review-card"><div class="rcount">'+(rIdx+1)+' / '+rQueue.length+'</div>'+
+    '<div class="rzh" lang="zh-Hant">'+c.zh+'</div>'+
+    '<button class="speak rspk" data-say="'+c.zh+'" aria-label="Listen">'+SPK+'</button>'+
+    '<div class="rback" style="display:none">'+(c.py?'<div class="rpy">'+c.py+'</div>':'')+(c.en?'<div class="ren">'+c.en+'</div>':'')+'</div>'+
+    '<div class="ractions"><button class="btn btn-primary rshow">Show answer</button></div>'+
+    '<div class="rrate" style="display:none"><button class="rbtn ragain" data-grade="again">Again</button><button class="rbtn rgood" data-grade="good">Good</button><button class="rbtn reasy" data-grade="easy">Easy</button></div></div>';
+}
+function reviewShow(){var m=document.getElementById('reviewModal');var b=m.querySelector('.rback');if(b)b.style.display='block';var a=m.querySelector('.ractions');if(a)a.style.display='none';var r=m.querySelector('.rrate');if(r)r.style.display='flex';}
+function reviewGrade(g){var c=rQueue[rIdx];if(!c)return;srsRate(c,g);if(g==='again')rQueue.push(c);rIdx++;showReviewCard();}
+
+/* active nav — highlight exactly ONE item by scroll position */
+function setActiveNav(spy){document.querySelectorAll('.nav a').forEach(function(a){a.classList.toggle('active',a.getAttribute('data-spy')===spy);});}
+var spyEls=[['.hero','top'],['#path','path']];
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){var s=en.target.getAttribute('data-spy-id');if(en.isIntersecting&&s)setActiveNav(s);});
+},{rootMargin:'-15% 0px -75% 0px'});
+spyEls.forEach(function(p){var el=document.querySelector(p[0]);if(el){el.setAttribute('data-spy-id',p[1]);io.observe(el);}});
+setActiveNav('top');
+
+/* ---------------- THREE.JS HERO LIGHTS ---------------- */
+(function(){
+  var canvas=document.getElementById('herofx');
+  if(!canvas||!window.THREE)return;
+  var renderer;try{renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});}catch(e){return;}
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(55,1,0.1,100);camera.position.z=15;
+  function glow(){var c=document.createElement('canvas');c.width=c.height=128;var g=c.getContext('2d');
+    var gr=g.createRadialGradient(64,64,0,64,64,64);gr.addColorStop(0,'rgba(255,200,120,0.95)');
+    gr.addColorStop(.3,'rgba(255,130,70,0.5)');gr.addColorStop(1,'rgba(255,90,50,0)');g.fillStyle=gr;g.fillRect(0,0,128,128);
+    return new THREE.CanvasTexture(c);}
+  var tex=glow();
+  var bodyMat=new THREE.MeshBasicMaterial({color:0xe23a2e}),capMat=new THREE.MeshBasicMaterial({color:0xf2b53a});
+  function lantern(){var grp=new THREE.Group();var bg=new THREE.SphereGeometry(0.5,16,12);bg.scale(1,1.18,1);
+    grp.add(new THREE.Mesh(bg,bodyMat));
+    var cap=new THREE.CylinderGeometry(0.16,0.2,0.1,12);
+    var tp=new THREE.Mesh(cap,capMat);tp.position.y=0.58;grp.add(tp);
+    var bt=new THREE.Mesh(cap,capMat);bt.position.y=-0.58;grp.add(bt);
+    var sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:.85}));
+    sp.scale.set(3.1,3.1,1);grp.add(sp);return grp;}
+  var lanterns=[];for(var i=0;i<9;i++){var l=lantern();l.scale.setScalar(0.5+Math.random()*0.9);
+    l.userData={bx:(Math.random()*2-1)*13,by:(Math.random()*2-1)*7,ph:Math.random()*6.28,sp:0.5+Math.random()*0.6,am:0.3+Math.random()*0.5};
+    l.position.set(l.userData.bx,l.userData.by,-9+Math.random()*10);scene.add(l);lanterns.push(l);}
+  var EN=90,pos=new Float32Array(EN*3),spd=new Float32Array(EN);
+  for(var j=0;j<EN;j++){pos[j*3]=(Math.random()*2-1)*16;pos[j*3+1]=(Math.random()*2-1)*9;pos[j*3+2]=(Math.random()*2-1)*6;spd[j]=0.004+Math.random()*0.01;}
+  var eg=new THREE.BufferGeometry();eg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  var embers=new THREE.Points(eg,new THREE.PointsMaterial({color:0xffb866,size:0.085,transparent:true,opacity:.8,blending:THREE.AdditiveBlending,depthWrite:false}));
+  scene.add(embers);
+  var mx=0,my=0;window.addEventListener('pointermove',function(e){mx=e.clientX/window.innerWidth-0.5;my=e.clientY/window.innerHeight-0.5;});
+  function size(){var w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  var t=0;
+  function loop(){requestAnimationFrame(loop);t+=0.01;
+    for(var k=0;k<lanterns.length;k++){var u=lanterns[k].userData;lanterns[k].position.y=u.by+Math.sin(t*u.sp+u.ph)*u.am;lanterns[k].position.x=u.bx+Math.cos(t*u.sp*0.6+u.ph)*0.4;lanterns[k].rotation.z=Math.sin(t*u.sp+u.ph)*0.06;}
+    var p=embers.geometry.attributes.position.array;for(var m=0;m<EN;m++){p[m*3+1]+=spd[m];if(p[m*3+1]>9){p[m*3+1]=-9;p[m*3]=(Math.random()*2-1)*16;}}
+    embers.geometry.attributes.position.needsUpdate=true;
+    camera.position.x+=(mx*2-camera.position.x)*0.04;camera.position.y+=(-my*1.2-camera.position.y)*0.04;camera.lookAt(0,0,0);
+    renderer.render(scene,camera);}
+  size();loop();window.addEventListener('resize',size);
+})();
+
+/* ---------------- SUPABASE SYNC (kotoba · tnm_progress) ---------------- */
+var SB=null;
+try{ if(window.supabase&&window.supabase.createClient) SB=window.supabase.createClient('https://nsqsucdmgdabnlroidya.supabase.co','sb_publishable_uE_p_Z1DeSVvzjkNDHtbOw_bGW6CcgF'); }catch(e){}
+var learnerId=localStorage.getItem('tnm_id');
+if(!learnerId){learnerId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'id-'+Date.now()+'-'+Math.random().toString(16).slice(2);try{localStorage.setItem('tnm_id',learnerId);}catch(e){}}
+var learnerName=localStorage.getItem('tnm_name')||'';
+var syncT=null;
+function syncCloud(){
+  if(!SB)return; clearTimeout(syncT);
+  syncT=setTimeout(function(){
+    SB.from('tnm_progress').upsert({
+      learner_id:learnerId, name:learnerName||null,
+      points:totalPoints(), streak:shownStreak(), words_learned:Object.keys(PROG.heard||{}).length,
+      favourites:favCount(), last_active:PROG.lastActive||null,
+      data:{heard:PROG.heard,fav:FAV,dayDate:PROG.dayDate,learnedToday:PROG.learnedToday,vocab:(typeof VOCAB!=='undefined'?VOCAB:[])},
+      updated_at:new Date().toISOString()
+    },{onConflict:'learner_id'}).then(function(r){ if(r&&r.error)console.warn('[sync]',r.error.message); });
+  },700);
+}
+function submitName(){
+  var inp=document.getElementById('nameInput'); var v=inp?(inp.value||'').trim():'';
+  if(v){learnerName=v;try{localStorage.setItem('tnm_name',v);}catch(e){}}
+  var m=document.getElementById('nameModal'); if(m)m.style.display='none';
+  syncCloud();
+}
+(function(){
+  var go=document.getElementById('nameGo'), inp=document.getElementById('nameInput'), m=document.getElementById('nameModal');
+  if(go)go.addEventListener('click',submitName);
+  if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')submitName();});
+  if(!learnerName && m){m.style.display='flex'; if(inp)setTimeout(function(){inp.focus();},60);}
+  else { syncCloud(); }
+})();
+</script>
+</body>
+</html>
