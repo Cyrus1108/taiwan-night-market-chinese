@@ -30,10 +30,10 @@
   --radius:16px; --radius-lg:22px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:'Nunito','Noto Sans TC',-apple-system,'Segoe UI','Microsoft JhengHei','PingFang TC',system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;line-height:1.5}
+  -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:clip}
 .zh,.zh-lg,.zh-sm,.digit-zh{font-family:'Noto Sans TC','Microsoft JhengHei','PingFang TC',sans-serif}
 ::-webkit-scrollbar{height:9px;width:9px}
 ::-webkit-scrollbar-thumb{background:#3a3026;border-radius:20px}
@@ -83,7 +83,7 @@ button{font-family:inherit}
   background:radial-gradient(130% 120% at 88% 0%,#3d2614 0%,#241710 45%,#140d09 100%);
   border:1px solid #33271a;display:flex;align-items:center}
 #herofx{position:absolute;inset:0;width:100%;height:100%}
-.hero-art{position:absolute;right:0;top:0;height:100%;width:46%;min-width:300px;pointer-events:none}
+.hero-art{position:absolute;right:0;top:0;height:100%;width:46%;max-width:340px;pointer-events:none}
 .hero-art svg{position:absolute;right:0;bottom:0;height:100%;width:100%}
 .hero-content{position:relative;z-index:3;padding:34px 38px;max-width:560px}
 .hero .hi{color:#ffd9a0;font-weight:800;font-size:16px;letter-spacing:.02em}
@@ -210,7 +210,7 @@ footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);color:v
 
 /* ---------------- RESPONSIVE ---------------- */
 @media (max-width:880px){
-  .app{flex-direction:column}
+  .app{flex-direction:column;align-items:stretch}
   .sidebar{position:static;height:auto;width:100%;flex-basis:auto;flex-direction:row;flex-wrap:wrap;
     align-items:center;gap:12px;border-right:none;border-bottom:1px solid var(--line);padding:14px}
   .tagline{display:none}
@@ -892,14 +892,19 @@ function showReviewCard(){
 function reviewShow(){var m=document.getElementById('reviewModal');var b=m.querySelector('.rback');if(b)b.style.display='block';var a=m.querySelector('.ractions');if(a)a.style.display='none';var r=m.querySelector('.rrate');if(r)r.style.display='flex';}
 function reviewGrade(g){var c=rQueue[rIdx];if(!c)return;srsRate(c,g);if(g==='again')rQueue.push(c);rIdx++;showReviewCard();}
 
-/* active nav — highlight exactly ONE item by scroll position */
+/* active nav — deterministic: lowest section whose top has passed the line; defaults to Home at the top */
 function setActiveNav(spy){document.querySelectorAll('.nav a').forEach(function(a){a.classList.toggle('active',a.getAttribute('data-spy')===spy);});}
 var spyEls=[['.hero','top'],['#path','path']];
-var io=new IntersectionObserver(function(entries){
-  entries.forEach(function(en){var s=en.target.getAttribute('data-spy-id');if(en.isIntersecting&&s)setActiveNav(s);});
-},{rootMargin:'-15% 0px -75% 0px'});
-spyEls.forEach(function(p){var el=document.querySelector(p[0]);if(el){el.setAttribute('data-spy-id',p[1]);io.observe(el);}});
-setActiveNav('top');
+function updateSpy(){
+  var db=document.getElementById('dashboard');
+  if(db && db.style.display==='none')return; /* a lesson/vocab view is open */
+  var line=window.innerHeight*0.3, cur='top';
+  spyEls.forEach(function(p){var el=document.querySelector(p[0]);if(el&&el.getBoundingClientRect().top<=line)cur=p[1];});
+  setActiveNav(cur);
+}
+window.addEventListener('scroll',updateSpy,{passive:true});
+window.addEventListener('resize',updateSpy,{passive:true});
+updateSpy();
 
 /* ---------------- THREE.JS HERO LIGHTS ---------------- */
 (function(){
