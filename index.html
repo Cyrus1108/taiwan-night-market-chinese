@@ -833,6 +833,13 @@ function recordHeard(word){
   }
   saveProg();refreshStats();syncCloud();
 }
+function creditReview(){
+  var t=todayStr();
+  if(PROG.dayDate!==t){PROG.dayDate=t;PROG.learnedToday=0;}
+  PROG.lastActive=t;PROG.points+=5;PROG.learnedToday+=1;
+  if(PROG.learnedToday>=GOAL && PROG.lastGoalDate!==t){PROG.streak=(PROG.lastGoalDate===yestStr())?PROG.streak+1:1;PROG.lastGoalDate=t;}
+  saveProg();refreshStats();syncCloud();
+}
 renderPath();refreshFav();refreshStats();
 
 /* ---------------- MY VOCABULARY (Kotoba-style spaced repetition) ---------------- */
@@ -890,7 +897,7 @@ function showReviewCard(){
     '<div class="rrate" style="display:none"><button class="rbtn ragain" data-grade="again">Again</button><button class="rbtn rgood" data-grade="good">Good</button><button class="rbtn reasy" data-grade="easy">Easy</button></div></div>';
 }
 function reviewShow(){var m=document.getElementById('reviewModal');var b=m.querySelector('.rback');if(b)b.style.display='block';var a=m.querySelector('.ractions');if(a)a.style.display='none';var r=m.querySelector('.rrate');if(r)r.style.display='flex';}
-function reviewGrade(g){var c=rQueue[rIdx];if(!c)return;srsRate(c,g);if(g==='again')rQueue.push(c);rIdx++;showReviewCard();}
+function reviewGrade(g){var c=rQueue[rIdx];if(!c)return;srsRate(c,g);if(g==='again'){rQueue.push(c);}else{creditReview();}rIdx++;showReviewCard();}
 
 /* active nav — deterministic: lowest section whose top has passed the line; defaults to Home at the top */
 function setActiveNav(spy){document.querySelectorAll('.nav a').forEach(function(a){a.classList.toggle('active',a.getAttribute('data-spy')===spy);});}
