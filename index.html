@@ -450,7 +450,7 @@ footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);color:v
     <p class="tagline">Learn like a local,<br>speak with confidence!</p>
     <nav class="nav" id="nav">
       <a href="#top" class="active" data-target="top" data-spy="top"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span><span class="tx">Home</span></a>
-      <a href="#vocab" data-view="vocab" data-spy="path"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M18 17H6"/></svg></span><span class="tx">Vocabulary</span></a>
+      <a href="#vocab" data-view="vocab" data-spy="vocab"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M18 17H6"/></svg></span><span class="tx">Vocabulary</span></a>
     </nav>
     <div class="goal">
       <img class="boba" src="assets/boba.png" alt="Bubble tea" />
@@ -797,7 +797,7 @@ function openLesson(key){
   lv.innerHTML=html; lv.style.display='block';
   document.getElementById('dashboard').style.display='none';
   window.scrollTo(0,0);
-  setActiveNav('path');
+  setActiveNav('top');
   refreshStats();
 }
 function closeLesson(){
@@ -949,7 +949,7 @@ function renderVocab(){
     '<div class="vadd"><input id="vAddZh" placeholder="中文 (e.g. 好吃)" maxlength="24" autocomplete="off"><input id="vAddPy" placeholder="pinyin (hǎochī)" maxlength="40" autocomplete="off"><input id="vAddEn" placeholder="meaning (delicious)" maxlength="60" autocomplete="off"><button class="btn btn-primary vaddbtn">+ Add</button></div>'+
     '<div class="vocab-list">'+rows+'</div>';
 }
-function openVocab(){closeLesson();renderVocab();document.getElementById('vocabView').style.display='block';document.getElementById('dashboard').style.display='none';window.scrollTo(0,0);setActiveNav('path');}
+function openVocab(){closeLesson();renderVocab();document.getElementById('vocabView').style.display='block';document.getElementById('dashboard').style.display='none';window.scrollTo(0,0);setActiveNav('vocab');}
 function closeVocab(){var v=document.getElementById('vocabView');if(v){v.style.display='none';v.innerHTML='';}}
 function addVocab(){var zEl=document.getElementById('vAddZh');if(!zEl)return;var zh=(zEl.value||'').trim();if(!zh)return;
   VOCAB.push({id:uid(),zh:zh,py:(document.getElementById('vAddPy').value||'').trim(),en:(document.getElementById('vAddEn').value||'').trim(),ease:2.5,interval:0,reps:0,due:todayStr()});
@@ -979,7 +979,7 @@ function updateSpy(){
   if(db && db.style.display==='none')return; /* a lesson/vocab view is open */
   var line=window.innerHeight*0.3, cur='top';
   spyEls.forEach(function(p){var el=document.querySelector(p[0]);if(el&&el.getBoundingClientRect().top<=line)cur=p[1];});
-  setActiveNav(cur);
+  setActiveNav('top');
 }
 window.addEventListener('scroll',updateSpy,{passive:true});
 window.addEventListener('resize',updateSpy,{passive:true});
