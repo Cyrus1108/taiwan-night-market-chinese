@@ -540,7 +540,7 @@ var LESSONS=[
   {n:4,key:"snacks",icon:'<img class="licon-img" src="assets/snacks.png" alt="Skewers" />',t:"Night-Market Snacks",done:0,total:13},
   {n:5,key:"dishes",icon:'<img class="licon-img" src="assets/dishes.png" alt="Braised pork rice" />',t:"Signature Dishes",done:0,total:7},
   {n:6,key:"numbers",icon:'<img class="licon-img" src="assets/money.png" alt="Fortune coin" />',t:"Numbers & Money",done:0,total:18},
-  {n:7,key:"plans",icon:"🗓️",t:"Making Plans",done:0,total:34}
+  {n:7,key:"plans",icon:"🗓️",t:"Making Plans",done:0,total:43}
 ];
 var PHRASES=[
   ["你好","nǐ hǎo","Hello"],["謝謝","xièxie","Thank you"],["不客氣","bú kèqi","You're welcome"],
@@ -627,6 +627,8 @@ var PLAN_MAKE=[["你星期五有時間嗎？","nǐ xīngqíwǔ yǒu shíjiān ma
 /* Grammar example sentences — verbatim from 第九課 語法 (textbook p.125-127). */
 var PLAN_GRAM1=[["今天星期幾？","jīntiān xīngqí jǐ","What day is it today?"],["今天星期三","jīntiān xīngqísān","Today is Wednesday"],["你平常星期幾去打網球？","nǐ píngcháng xīngqí jǐ qù dǎ wǎngqiú","Which day do you usually play tennis?"],["我平常星期五去打網球","wǒ píngcháng xīngqíwǔ qù dǎ wǎngqiú","I usually play tennis on Fridays"]];
 var PLAN_GRAM2=[["五月六號是星期幾？","wǔyuè liù hào shì xīngqí jǐ","What day is May 6th?"],["五月六號是星期二","wǔyuè liù hào shì xīngqí'èr","May 6th is a Tuesday"],["二〇二一年九月十八號星期六晚上","èr líng èr yī nián jiǔyuè shíbā hào xīngqíliù wǎnshàng","Saturday evening, September 18, 2021"]];
+var PLAN_GRAM3=[["現在幾點？","xiànzài jǐ diǎn","What time is it now?"],["現在十點二十分","xiànzài shí diǎn èrshí fēn","It is 10:20"],["兩點","liǎng diǎn","2:00"],["五點三十分","wǔ diǎn sānshí fēn","5:30"],["七點五分","qī diǎn wǔ fēn","7:05"],["一點半","yì diǎn bàn","1:30 (half past one)"]];
+var PLAN_GRAM4=[["我常常跟我弟弟一起運動","wǒ chángcháng gēn wǒ dìdi yìqǐ yùndòng","I often exercise with my younger brother"],["我週末跟我父母一起吃晚飯","wǒ zhōumò gēn wǒ fùmǔ yìqǐ chī wǎnfàn","I have dinner with my parents on weekends"],["Gloria 跟我們一起去跑步","Gloria gēn wǒmen yìqǐ qù pǎobù","Gloria went running with us"]];
 
 /* ---------------- RENDER ---------------- */
 var SPK='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
@@ -679,6 +681,7 @@ function toneHTML(t){return '<div class="tone"><div class="ma" lang="zh-Hant">'+
   '<svg width="64" height="26" viewBox="0 0 64 26">'+t.path+'</svg>'+
   '<div class="nm">'+t.nm+'</div><div class="ms">'+t.ms+'</div>'+
   '<button class="speak" style="margin:9px auto 0" data-say="'+t.say+'" aria-label="Listen">'+SPK+'</button></div>';}
+function audioHTML(a){return '<div style="margin:10px 0"><div style="font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:5px">'+a[0]+'</div><audio controls preload="none" style="width:100%;max-width:440px" src="assets/audio/'+a[1]+'"></audio></div>';}
 var LESSON_PAGES={
   tones:{n:1,title:"Find the Four Tones",zh:"四聲",icon:"🎵",done:0,total:5,
     tip:"Tones are the first thing to nail — get them right and every word in the other modules becomes easier. Trace the pitch line with your hand as you say each “ma”.",
@@ -702,7 +705,7 @@ var LESSON_PAGES={
     tip:"Ask 多少錢?(how much). Mandarin puts a counter between the number and the item — 一個 / 一杯 / 一碗.",
     sections:[{kind:"nums",head:"🔢 Numbers",sub:"數字",data:NUMS},
               {kind:"pairs",head:"🛒 Ordering",sub:"點餐用語",data:ORDER,counter:true}]},
-  plans:{n:7,title:"Making Plans",zh:"約吃飯",icon:"🗓️",done:0,total:34,
+  plans:{n:7,title:"Making Plans",zh:"約吃飯",icon:"🗓️",done:0,total:43,
     tip:"In Taiwan, plans usually revolve around a meal. 星期五怎麼樣?(How about Friday?) picks the day, 你幾點下課?(what time do you finish?) finds a time, and 六點半在餐廳見 seals it. Open warmly with 好久不見 — “long time no see”.",
     sections:[{kind:"pairs",head:"🗓️ Days of the week",sub:"星期",data:PLAN_DAYS},
               {kind:"pairs",head:"🕐 Telling time",sub:"時間",data:PLAN_TIME},
@@ -710,6 +713,10 @@ var LESSON_PAGES={
               {kind:"pairs",head:"📅 Making plans",sub:"約時間",data:PLAN_MAKE},
               {kind:"pairs",head:"① Grammar · Days of the week",sub:"星期＋數字",intro:"Ask the day with 星期幾? and answer by swapping 幾 for the day-number: 星期一 (Mon) … 星期六 (Sat). Sunday is 星期天 / 星期日 — never 星期七. 禮拜 and 週 mean the same (禮拜一 = 週一 = Monday).",data:PLAN_GRAM1},
               {kind:"pairs",head:"② Grammar · Word order for dates",sub:"日期語序",intro:"Mandarin dates run largest → smallest: year → month → 號(day) → weekday → time of day. Years are read digit-by-digit, then 年 (二〇二一年 = “two-zero-two-one year”).",data:PLAN_GRAM2},
+              {kind:"pairs",head:"③ Grammar · Telling the time",sub:"報時間",intro:"Tell the time with 點 (o'clock), 分 (minute) and 半 (half). Ask 現在幾點? — 鐘 is usually dropped (兩點鐘 → 兩點); 分 can be dropped when the minutes have two syllables (四點二十); 半 = 30 minutes past.",data:PLAN_GRAM3},
+              {kind:"pairs",head:"④ Grammar · Doing things together",sub:"跟…一起",intro:"Put 跟 + a person before the main verb to say you do something together with them; 一起 (together) usually goes with 跟. Pattern: 跟 + someone + 一起 + verb (+ object).",data:PLAN_GRAM4},
+              {kind:"audio",head:"🔊 Pinyin practice",sub:"語音",intro:"Finals in this lesson: -uai, -ui (uei), -üe, -en, -in. Play the official recording and repeat each syllable in all four tones (kuai · huai · wai · dui · hui · gui · sui · wei · xue · yue · men · jin · yin). Spelling notes from the textbook: (1) -uai with no initial → wai (外 wài). (2) -ui with no initial → wei (喂 wéi). (3) -üe only follows j / q / x and is written -ue (學 xué, 缺 quē, 覺 jué). (4) -üe with no initial → yue (月 yuè). (5) -in with no initial → yin (銀 yín).",data:[["Pinyin & syllables — official recording","L9-pinyin.mp3"]]},
+              {kind:"audio",head:"🎧 Listen to the lesson",sub:"錄音",intro:"Native-voice recordings from 全球華文網 — listen along with the textbook.",data:[["Dialogue 課文","L9-text.mp3"],["Vocabulary 生詞","L9-vocab.mp3"],["Grammar 語法","L9-grammar.mp3"]]},
               {kind:"links",head:"📺 Watch & listen",sub:"影片·音檔",intro:'Official Lesson&nbsp;9 resources from 全球華文網 (free): <a href="https://www.youtube.com/watch?v=U-42EZJ3okU" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">📺 teaching video</a> &nbsp;·&nbsp; <a href="https://www.huayuworld.org/Ebook/ebookDetail?EID=682" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">🎧 official audio &amp; materials</a>. Tap 🔊 on any card above to hear it spoken.'}]}
 };
 function buildLesson(key){
@@ -721,6 +728,7 @@ function buildLesson(key){
     else if(s.kind==='nums')grid='<div class="nums">'+s.data.map(numHTML).join('')+'</div>';
     else if(s.kind==='opt')grid='<div class="optgrid">'+s.data.map(optHTML).join('')+'</div>';
     else if(s.kind==='tones')grid='<div class="tones">'+s.data.map(toneHTML).join('')+'</div>';
+    else if(s.kind==='audio')grid='<div class="audiogrid">'+s.data.map(audioHTML).join('')+'</div>';
     return '<div class="subhead"><span>'+s.head+'</span><span class="pill">'+s.sub+'</span></div>'+(s.intro?'<p class="lp-intro">'+s.intro+'</p>':'')+grid;
   }).join('');
   var dn=lessonDone(key),tt=lessonTotal(key),p100=pct(dn,tt);
