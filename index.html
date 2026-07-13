@@ -540,7 +540,7 @@ var LESSONS=[
   {n:4,key:"snacks",icon:'<img class="licon-img" src="assets/snacks.png" alt="Skewers" />',t:"Night-Market Snacks",done:0,total:13},
   {n:5,key:"dishes",icon:'<img class="licon-img" src="assets/dishes.png" alt="Braised pork rice" />',t:"Signature Dishes",done:0,total:7},
   {n:6,key:"numbers",icon:'<img class="licon-img" src="assets/money.png" alt="Fortune coin" />',t:"Numbers & Money",done:0,total:18},
-  {n:7,key:"plans",icon:"🗓️",t:"Making Plans",done:0,total:27}
+  {n:7,key:"plans",icon:"🗓️",t:"Making Plans",done:0,total:34}
 ];
 var PHRASES=[
   ["你好","nǐ hǎo","Hello"],["謝謝","xièxie","Thank you"],["不客氣","bú kèqi","You're welcome"],
@@ -624,6 +624,9 @@ var PLAN_DAYS=[["星期一","xīngqíyī","Monday"],["星期二","xīngqí'èr",
 var PLAN_TIME=[["時間","shíjiān","time"],["幾點？","jǐ diǎn","What time?"],["點","diǎn","o'clock"],["半","bàn","half past"],["五點","wǔ diǎn","5 o'clock"],["六點半","liù diǎn bàn","6:30"],["下課","xiàkè","to finish class"]];
 var PLAN_MEET=[["好久不見","hǎojiǔ bújiàn","Long time no see"],["很高興認識你","hěn gāoxìng rènshì nǐ","Nice to meet you"],["這位是我同事","zhè wèi shì wǒ tóngshì","This is my colleague"],["同事","tóngshì","colleague"]];
 var PLAN_MAKE=[["你星期五有時間嗎？","nǐ xīngqíwǔ yǒu shíjiān ma","Are you free on Friday?"],["你要不要跟我們一起去？","nǐ yào bú yào gēn wǒmen yìqǐ qù","Do you want to go with us?"],["星期五怎麼樣？","xīngqíwǔ zěnmeyàng","How about Friday?"],["一起","yìqǐ","together"],["跟","gēn","with"],["行","xíng","okay / all right"],["沒問題","méi wèntí","No problem"],["餐廳","cāntīng","restaurant"],["我們星期五見","wǒmen xīngqíwǔ jiàn","See you Friday"]];
+/* Grammar example sentences — verbatim from 第九課 語法 (textbook p.125-127). */
+var PLAN_GRAM1=[["今天星期幾？","jīntiān xīngqí jǐ","What day is it today?"],["今天星期三","jīntiān xīngqísān","Today is Wednesday"],["你平常星期幾去打網球？","nǐ píngcháng xīngqí jǐ qù dǎ wǎngqiú","Which day do you usually play tennis?"],["我平常星期五去打網球","wǒ píngcháng xīngqíwǔ qù dǎ wǎngqiú","I usually play tennis on Fridays"]];
+var PLAN_GRAM2=[["五月六號是星期幾？","wǔyuè liù hào shì xīngqí jǐ","What day is May 6th?"],["五月六號是星期二","wǔyuè liù hào shì xīngqí'èr","May 6th is a Tuesday"],["二〇二一年九月十八號星期六晚上","èr líng èr yī nián jiǔyuè shíbā hào xīngqíliù wǎnshàng","Saturday evening, September 18, 2021"]];
 
 /* ---------------- RENDER ---------------- */
 var SPK='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
@@ -699,12 +702,15 @@ var LESSON_PAGES={
     tip:"Ask 多少錢?(how much). Mandarin puts a counter between the number and the item — 一個 / 一杯 / 一碗.",
     sections:[{kind:"nums",head:"🔢 Numbers",sub:"數字",data:NUMS},
               {kind:"pairs",head:"🛒 Ordering",sub:"點餐用語",data:ORDER,counter:true}]},
-  plans:{n:7,title:"Making Plans",zh:"約吃飯",icon:"🗓️",done:0,total:27,
+  plans:{n:7,title:"Making Plans",zh:"約吃飯",icon:"🗓️",done:0,total:34,
     tip:"In Taiwan, plans usually revolve around a meal. 星期五怎麼樣?(How about Friday?) picks the day, 你幾點下課?(what time do you finish?) finds a time, and 六點半在餐廳見 seals it. Open warmly with 好久不見 — “long time no see”.",
     sections:[{kind:"pairs",head:"🗓️ Days of the week",sub:"星期",data:PLAN_DAYS},
               {kind:"pairs",head:"🕐 Telling time",sub:"時間",data:PLAN_TIME},
               {kind:"pairs",head:"🤝 Meeting people",sub:"見面",data:PLAN_MEET},
-              {kind:"pairs",head:"📅 Making plans",sub:"約時間",data:PLAN_MAKE}]}
+              {kind:"pairs",head:"📅 Making plans",sub:"約時間",data:PLAN_MAKE},
+              {kind:"pairs",head:"① Grammar · Days of the week",sub:"星期＋數字",intro:"Ask the day with 星期幾? and answer by swapping 幾 for the day-number: 星期一 (Mon) … 星期六 (Sat). Sunday is 星期天 / 星期日 — never 星期七. 禮拜 and 週 mean the same (禮拜一 = 週一 = Monday).",data:PLAN_GRAM1},
+              {kind:"pairs",head:"② Grammar · Word order for dates",sub:"日期語序",intro:"Mandarin dates run largest → smallest: year → month → 號(day) → weekday → time of day. Years are read digit-by-digit, then 年 (二〇二一年 = “two-zero-two-one year”).",data:PLAN_GRAM2},
+              {kind:"links",head:"📺 Watch & listen",sub:"影片·音檔",intro:'Official Lesson&nbsp;9 resources from 全球華文網 (free): <a href="https://www.youtube.com/watch?v=U-42EZJ3okU" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">📺 teaching video</a> &nbsp;·&nbsp; <a href="https://www.huayuworld.org/Ebook/ebookDetail?EID=682" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">🎧 official audio &amp; materials</a>. Tap 🔊 on any card above to hear it spoken.'}]}
 };
 function buildLesson(key){
   var p=LESSON_PAGES[key]; if(!p)return '';
