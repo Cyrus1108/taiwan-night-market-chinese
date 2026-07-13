@@ -367,6 +367,21 @@ footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);color:v
 .rbtn.reasy{background:var(--green-soft);color:var(--green)}
 .rbtn:hover{filter:brightness(1.25)}
 @media (max-width:560px){.vadd input{flex-basis:100%}}
+
+/* ---- ruby pinyin (short words only; long sentences keep pinyin below) ---- */
+ruby{ruby-position:over;ruby-align:center}
+ruby rt{font-family:'Nunito','Segoe UI',sans-serif;font-weight:800;font-size:.5em;color:var(--red);line-height:1.2;padding-bottom:3px;letter-spacing:0}
+.cell .zh-row ruby rt,.phrase .zh ruby rt{font-size:.46em}
+/* favourite star on lesson word cards */
+.cell{position:relative}
+.cell .star{position:absolute;top:8px;right:10px;font-size:15px;color:var(--ink-faint);cursor:pointer;line-height:1;z-index:2}
+.cell .star.on{color:var(--amber-deep)}
+.cell .zh-row{padding-right:20px}
+/* daily-goal toast */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);z-index:1500;
+  background:var(--card);border:1px solid var(--amber);color:var(--ink);border-radius:14px;max-width:90vw;
+  padding:13px 22px;font-weight:800;font-size:15px;box-shadow:0 14px 34px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:.35s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -674,6 +689,9 @@ var PLAN_GRAM4=[["我常常跟我弟弟一起運動","wǒ chángcháng gēn wǒ 
 
 /* ---------------- RENDER ---------------- */
 var SPK='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+/* ruby pinyin: short words get pinyin above (group ruby); long sentences keep pinyin on its own line */
+function isWord(z){return z.length<=5 && !/[？！，。、：；]/.test(z);}
+function rzh(z,p){return isWord(z)?'<ruby>'+z+'<rt>'+p+'</rt></ruby>':z;}
 function esc(s){return s;}
 function pct(d,t){return Math.round(d/t*100);}
 
@@ -689,32 +707,33 @@ document.getElementById('pathRow').innerHTML = LESSONS.map(function(l){
 }
 
 document.getElementById('phraseRow').innerHTML = PHRASES.map(function(p){
-  return '<div class="phrase"><span class="star" data-fav="'+p[0]+'">☆</span>'+
-    '<div class="zh" lang="zh-Hant">'+p[0]+'</div><div class="py">'+p[1]+'</div><div class="en">'+p[2]+'</div>'+
+  var w=isWord(p[0]);
+  return '<div class="phrase"><span class="star" data-fav="'+p[0]+'" data-py="'+p[1]+'" data-en="'+p[2]+'">☆</span>'+
+    '<div class="zh" lang="zh-Hant">'+rzh(p[0],p[1])+'</div>'+(w?'':'<div class="py">'+p[1]+'</div>')+'<div class="en">'+p[2]+'</div>'+
     '<button class="speak" data-say="'+p[0]+'" aria-label="Listen">'+SPK+'</button></div>';
 }).join('') +
 '<div class="streak"><div class="sk-t">Streak <span>🔥</span></div><div class="sk-n"><span class="js-streak">0</span> <small>days</small></div><div class="sk-s js-streak-msg">Start your streak today!</div><svg class="mini" viewBox="0 0 120 120"><use href="#mochi-flag"/></svg></div>';
 
-function pairHTML(a){return '<div class="cell"><div class="zh-row"><span class="zh-sm" lang="zh-Hant">'+a[0]+'</span><button class="speak" style="width:30px;height:30px;margin-top:0" data-say="'+a[0].replace(/[？！]/g,'')+'" aria-label="Listen">'+SPK+'</button></div><div class="py">'+a[1]+'</div><div class="en">'+a[2]+'</div></div>';}
+function pairHTML(a){var w=isWord(a[0]);return '<div class="cell">'+(w?'<span class="star" data-fav="'+a[0]+'" data-py="'+a[1]+'" data-en="'+a[2]+'">☆</span>':'')+'<div class="zh-row"><span class="zh-sm" lang="zh-Hant">'+rzh(a[0],a[1])+'</span><button class="speak" style="width:30px;height:30px;margin-top:0" data-say="'+a[0].replace(/[？！]/g,'')+'" aria-label="Listen">'+SPK+'</button></div>'+(w?'':'<div class="py">'+a[1]+'</div>')+'<div class="en">'+a[2]+'</div></div>';}
 /* greetings & numbers vocab now live in their Learning Path lesson pages */
 
 function foodHTML(f){
   return '<article class="food"><div class="emoji">'+f[0]+'</div><div class="body">'+
-    '<div class="zh-row"><span class="zh" lang="zh-Hant">'+f[1]+'</span>'+(f[6]?'<span class="tag-hk">Hokkien</span>':'')+'</div>'+
-    '<div class="py">'+f[2]+'</div><div class="nm">'+f[3]+'</div>'+
+    '<div class="zh-row"><span class="zh" lang="zh-Hant">'+rzh(f[1],f[2])+'</span>'+(f[6]?'<span class="tag-hk">Hokkien</span>':'')+'</div>'+
+    (isWord(f[1])?'':'<div class="py">'+f[2]+'</div>')+'<div class="nm">'+f[3]+'</div>'+
     '<p class="tip"><span class="badge-say">Say it</span>'+f[4]+'</p><p class="desc">'+f[5]+'</p></div>'+
     '<button class="speak" data-say="'+f[1]+'" aria-label="Listen">'+SPK+'</button></article>';
 }
 /* food vocab now lives in the Drinks / Snacks / Dishes lesson pages */
 
 /* ---------------- LESSON PAGES ---------------- */
-function numHTML(a){return '<div class="cell num-cell"><span class="digit">'+a[0]+'</span><span class="digit-zh" lang="zh-Hant">'+a[1]+'</span><span class="py">'+a[2]+'</span><button class="speak" style="width:26px;height:26px;margin:5px auto 0" data-say="'+a[1]+'" aria-label="Listen">'+SPK+'</button></div>';}
+function numHTML(a){return '<div class="cell num-cell"><span class="digit">'+a[0]+'</span><span class="digit-zh" lang="zh-Hant">'+rzh(a[1],a[2])+'</span><button class="speak" style="width:26px;height:26px;margin:5px auto 0" data-say="'+a[1]+'" aria-label="Listen">'+SPK+'</button></div>';}
 function counterCell(){return '<div class="cell full"><div class="zh-row"><span class="zh-sm" lang="zh-Hant">一個 · 一杯 · 一碗</span><span class="py" style="font-size:14px">yí ge · yì bēi · yì wǎn</span></div><div class="en" style="margin-top:4px">Counters: 一個 = one item · 一杯 = one cup (drinks) · 一碗 = one bowl (noodles).</div></div>';}
 function optHTML(o){
   return '<div class="opt'+(o.def?' opt-def':'')+'"><div class="opt-head">'+
-    '<span class="opt-zh" lang="zh-Hant">'+o.zh+'</span>'+(o.lvl?'<span class="opt-lvl">'+o.lvl+'</span>':'')+
+    '<span class="opt-zh" lang="zh-Hant">'+rzh(o.zh,o.py)+'</span>'+(o.lvl?'<span class="opt-lvl">'+o.lvl+'</span>':'')+
     '<button class="speak opt-spk" data-say="'+o.zh+'" aria-label="Listen">'+SPK+'</button></div>'+
-    '<div class="py">'+o.py+'</div>'+
+    (isWord(o.zh)?'':'<div class="py">'+o.py+'</div>')+
     '<div class="opt-en">'+o.en+(o.def?' <span class="opt-deftag">default</span>':'')+'</div>'+
     (o.alt?'<div class="opt-alt">also: '+o.alt+'</div>':'')+
     '<div class="opt-tip">'+o.tip+'</div></div>';
@@ -849,7 +868,13 @@ function refreshFav(){
     if(FAV[k]){s.classList.add('on');s.textContent='★';}else{s.classList.remove('on');s.textContent='☆';}});
   document.getElementById('favCount').textContent=Object.keys(FAV).filter(function(k){return FAV[k];}).length;
 }
-function toggleFav(s){var k=s.getAttribute('data-fav');FAV[k]=!FAV[k];try{localStorage.setItem('tnm_fav',JSON.stringify(FAV));}catch(e){}refreshFav();refreshStats();syncCloud();}
+function toggleFav(s){var k=s.getAttribute('data-fav'),py=s.getAttribute('data-py')||'',en=s.getAttribute('data-en')||'';FAV[k]=!FAV[k];try{localStorage.setItem('tnm_fav',JSON.stringify(FAV));}catch(e){}
+  if(typeof VOCAB!=='undefined'){
+    if(FAV[k]){if(!VOCAB.some(function(c){return c.zh===k;}))VOCAB.push({id:uid(),zh:k,py:py,en:en,ease:2.5,interval:0,reps:0,due:todayStr(),fromFav:true});}
+    else{VOCAB=VOCAB.filter(function(c){return !(c.zh===k&&c.fromFav&&!c.reps);});}
+    saveVocab();var vv=document.getElementById('vocabView');if(vv&&vv.style.display==='block')renderVocab();
+  }
+  refreshFav();refreshStats();syncCloud();}
 
 /* ---------------- PROGRESS (local, honest stats — Supabase sync later) ---------------- */
 var GOAL=15;
@@ -891,6 +916,8 @@ function refreshStats(){
   updatePathProgress();
   if(currentLessonKey){var ld=lessonDone(currentLessonKey),lt=lessonTotal(currentLessonKey);setTxt('lpProgTxt','Progress: '+ld+' of '+lt+' words complete');var lpb=document.getElementById('lpProgBar');if(lpb)lpb.style.width=pct(ld,lt)+'%';}
 }
+function showToast(msg){var t=document.getElementById('gToast');if(!t){t=document.createElement('div');t.id='gToast';t.className='toast';document.body.appendChild(t);}t.textContent=msg;t.classList.add('show');clearTimeout(window._gt);window._gt=setTimeout(function(){t.classList.remove('show');},3400);}
+function celebrateGoal(){showToast('🎉 Daily goal reached! '+GOAL+' new words · '+PROG.streak+'-day streak 🔥');}
 function recordHeard(word){
   if(!word)return;
   var t=todayStr();
@@ -900,7 +927,7 @@ function recordHeard(word){
     PROG.heard[word]=true;PROG.points+=10;PROG.learnedToday+=1;
     if(PROG.learnedToday>=GOAL && PROG.lastGoalDate!==t){
       PROG.streak=(PROG.lastGoalDate===yestStr())?PROG.streak+1:1;
-      PROG.lastGoalDate=t;
+      PROG.lastGoalDate=t;celebrateGoal();
     }
   }
   saveProg();refreshStats();syncCloud();
@@ -909,7 +936,7 @@ function creditReview(){
   var t=todayStr();
   if(PROG.dayDate!==t){PROG.dayDate=t;PROG.learnedToday=0;}
   PROG.lastActive=t;PROG.points+=5;PROG.learnedToday+=1;
-  if(PROG.learnedToday>=GOAL && PROG.lastGoalDate!==t){PROG.streak=(PROG.lastGoalDate===yestStr())?PROG.streak+1:1;PROG.lastGoalDate=t;}
+  if(PROG.learnedToday>=GOAL && PROG.lastGoalDate!==t){PROG.streak=(PROG.lastGoalDate===yestStr())?PROG.streak+1:1;PROG.lastGoalDate=t;celebrateGoal();}
   saveProg();refreshStats();syncCloud();
 }
 renderPath();refreshFav();refreshStats();
