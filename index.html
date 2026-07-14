@@ -1067,23 +1067,61 @@ function syncCloud(){
       learner_id:learnerId, name:learnerName||null,
       points:totalPoints(), streak:shownStreak(), words_learned:Object.keys(PROG.heard||{}).length,
       favourites:favCount(), last_active:PROG.lastActive||null,
-      data:{heard:PROG.heard,fav:FAV,dayDate:PROG.dayDate,learnedToday:PROG.learnedToday,vocab:(typeof VOCAB!=='undefined'?VOCAB:[])},
+      data:{heard:PROG.heard,fav:FAV,dayDate:PROG.dayDate,learnedToday:PROG.learnedToday,points:PROG.points,streak:PROG.streak,lastGoalDate:PROG.lastGoalDate,lastActive:PROG.lastActive,vocab:(typeof VOCAB!=='undefined'?VOCAB:[])},
       updated_at:new Date().toISOString()
     },{onConflict:'learner_id'}).then(function(r){ if(r&&r.error)console.warn('[sync]',r.error.message); });
   },700);
+}
+/* merge a cloud snapshot into local state — union words/heard/fav, keep the richer side; never lose local data */
+function mergeCloud(cd){
+  if(!cd) return;
+  PROG.heard=PROG.heard||{};
+  if(cd.heard) for(var k in cd.heard){ if(cd.heard[k]) PROG.heard[k]=true; }
+  if(cd.fav) for(var f in cd.fav){ if(cd.fav[f]) FAV[f]=true; }
+  if(Array.isArray(cd.vocab) && typeof VOCAB!=='undefined'){
+    var byZh={}; VOCAB.forEach(function(c){byZh[c.zh]=c;});
+    cd.vocab.forEach(function(c){ if(!c||!c.zh) return; var ex=byZh[c.zh];
+      if(!ex){ VOCAB.push(c); byZh[c.zh]=c; }
+      else if((c.reps||0)>(ex.reps||0)){ ex.reps=c.reps; ex.interval=c.interval; ex.ease=c.ease; ex.due=c.due; if(!ex.py&&c.py)ex.py=c.py; if(!ex.en&&c.en)ex.en=c.en; }
+    });
+  }
+  if(typeof cd.points==='number') PROG.points=Math.max(PROG.points||0, cd.points);
+  if(typeof cd.streak==='number') PROG.streak=Math.max(PROG.streak||0, cd.streak);
+  if(cd.lastGoalDate && cd.lastGoalDate>(PROG.lastGoalDate||'')) PROG.lastGoalDate=cd.lastGoalDate;
+  if(cd.lastActive && cd.lastActive>(PROG.lastActive||'')) PROG.lastActive=cd.lastActive;
+  saveProg(); if(typeof saveVocab==='function') saveVocab();
+  try{localStorage.setItem('tnm_fav',JSON.stringify(FAV));}catch(e){}
+  refreshFav(); refreshStats(); renderPath();
+  var vv=document.getElementById('vocabView'); if(vv&&vv.style.display==='block'&&typeof renderVocab==='function') renderVocab();
+}
+/* pull this learner's cloud row (by id, else by name) and merge it in, then push merged state back up */
+function restoreFromCloud(){
+  if(!SB){ return; }
+  var cols='learner_id,name,data,updated_at';
+  SB.from('tnm_progress').select(cols).eq('learner_id',learnerId).limit(1).then(function(r){
+    var row=(r&&r.data&&r.data[0])||null;
+    if(row){ mergeCloud(row.data); syncCloud(); return; }
+    if(learnerName){
+      SB.from('tnm_progress').select(cols).ilike('name',learnerName).order('updated_at',{ascending:false}).limit(1).then(function(r2){
+        var row2=(r2&&r2.data&&r2.data[0])||null;
+        if(row2){ mergeCloud(row2.data); if(row2.learner_id&&row2.learner_id!==learnerId){ learnerId=row2.learner_id; try{localStorage.setItem('tnm_id',learnerId);}catch(e){} } }
+        syncCloud();
+      }, function(){ syncCloud(); });
+    } else { syncCloud(); }
+  }, function(){ syncCloud(); });
 }
 function submitName(){
   var inp=document.getElementById('nameInput'); var v=inp?(inp.value||'').trim():'';
   if(v){learnerName=v;try{localStorage.setItem('tnm_name',v);}catch(e){}}
   var m=document.getElementById('nameModal'); if(m)m.style.display='none';
-  syncCloud();
+  restoreFromCloud();
 }
 (function(){
   var go=document.getElementById('nameGo'), inp=document.getElementById('nameInput'), m=document.getElementById('nameModal');
   if(go)go.addEventListener('click',submitName);
   if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')submitName();});
   if(!learnerName && m){m.style.display='flex'; if(inp)setTimeout(function(){inp.focus();},60);}
-  else { syncCloud(); }
+  else { restoreFromCloud(); }
 })();
 </script>
 </body>
