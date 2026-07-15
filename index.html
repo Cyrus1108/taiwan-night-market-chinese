@@ -597,7 +597,8 @@ var LESSONS=[
   {n:4,key:"snacks",icon:'<img class="licon-img" src="assets/snacks.png" alt="Skewers" />',t:"Night-Market Snacks",done:0,total:13},
   {n:5,key:"dishes",icon:'<img class="licon-img" src="assets/dishes.png" alt="Braised pork rice" />',t:"Signature Dishes",done:0,total:7},
   {n:6,key:"numbers",icon:'<img class="licon-img" src="assets/money.png" alt="Fortune coin" />',t:"Numbers & Money",done:0,total:18},
-  {n:7,key:"plans",icon:"🗓️",t:"Making Plans",done:0,total:43}
+  {n:7,key:"plans",icon:"🗓️",t:"Making Plans",done:0,total:43},
+  {n:8,key:"coffee",icon:"☕",t:"Café Orders",done:0,total:44}
 ];
 var PHRASES=[
   ["你好","nǐ hǎo","Hello"],["謝謝","xièxie","Thank you"],["不客氣","bú kèqi","You're welcome"],
@@ -686,6 +687,19 @@ var PLAN_GRAM1=[["今天星期幾？","jīntiān xīngqí jǐ","What day is it t
 var PLAN_GRAM2=[["五月六號是星期幾？","wǔyuè liù hào shì xīngqí jǐ","What day is May 6th?"],["五月六號是星期二","wǔyuè liù hào shì xīngqí'èr","May 6th is a Tuesday"],["二〇二一年九月十八號星期六晚上","èr líng èr yī nián jiǔyuè shíbā hào xīngqíliù wǎnshàng","Saturday evening, September 18, 2021"]];
 var PLAN_GRAM3=[["現在幾點？","xiànzài jǐ diǎn","What time is it now?"],["現在十點二十分","xiànzài shí diǎn èrshí fēn","It is 10:20"],["兩點","liǎng diǎn","2:00"],["五點三十分","wǔ diǎn sānshí fēn","5:30"],["七點五分","qī diǎn wǔ fēn","7:05"],["一點半","yì diǎn bàn","1:30 (half past one)"]];
 var PLAN_GRAM4=[["我常常跟我弟弟一起運動","wǒ chángcháng gēn wǒ dìdi yìqǐ yùndòng","I often exercise with my younger brother"],["我週末跟我父母一起吃晚飯","wǒ zhōumò gēn wǒ fùmǔ yìqǐ chī wǎnfàn","I have dinner with my parents on weekends"],["Gloria 跟我們一起去跑步","Gloria gēn wǒmen yìqǐ qù pǎobù","Gloria went running with us"]];
+
+/* Lesson 8 · Café Orders — 來學華語 第二冊 第四課「我要一杯熱咖啡」(printed pp.53-66).
+   Taiwan pinyin follows the textbook: 咖啡 = kāfēi, 還是 = háishì, 一樣 = yíyàng.
+   熱 rè / 大 dà / 杯 bēi appear in the 課文 & lesson title (with zhuyin) but not
+   in the numbered 生詞 list; all other cards are from the 25-word 生詞 table. */
+var CAFE_DRINKS=[["咖啡","kāfēi","coffee"],["紅茶","hóngchá","black tea"],["飲料","yǐnliào","beverage"],["水","shuǐ","water"],["冰水","bīng shuǐ","iced water"],["蛋糕","dàngāo","cake"],["雞","jī","chicken"],["肉","ròu","meat"],["三明治","sānmíngzhì","sandwich"],["雞肉三明治","jīròu sānmíngzhì","chicken sandwich"],["咖啡店","kāfēi diàn","coffee shop"]];
+var CAFE_TEMP=[["熱","rè","hot"],["冰","bīng","iced"],["大杯","dà bēi","large (cup)"],["中杯","zhōng bēi","medium (cup)"],["小杯","xiǎo bēi","small (cup)"]];
+var CAFE_ADD=[["加","jiā","to add"],["牛奶","niúnǎi","milk"],["糖","táng","sugar"],["甜","tián","sweet"],["鹹","xián","salty"],["塊","kuài","measure word — a slice (of cake)"],["別的","biéde","other / another"],["一樣","yíyàng","the same / alike"]];
+var CAFE_ORDER=[["我要一杯熱咖啡","wǒ yào yì bēi rè kāfēi","I'd like a cup of hot coffee"],["加牛奶，不加糖","jiā niúnǎi, bù jiā táng","With milk, no sugar"],["您要喝什麼？","nín yào hē shénme","What would you like to drink?"],["您要熱的還是冰的？","nín yào rè de háishì bīng de","Hot or iced?"],["您要大杯、中杯還是小杯的？","nín yào dà bēi, zhōng bēi háishì xiǎo bēi de","Large, medium, or small?"],["還要別的嗎？","hái yào biéde ma","Anything else?"],["我還要一塊蛋糕","wǒ hái yào yí kuài dàngāo","I'd also like a slice of cake"],["請等一下，馬上來","qǐng děng yíxià, mǎshàng lái","One moment, coming right up"]];
+/* Grammar example sentences — verbatim from 第四課 語法 (textbook pp.57-61). */
+var CAFE_GRAM1=[["妳要喝牛奶嗎？","nǐ yào hē niúnǎi ma","Would you like to drink milk?"],["要，我要喝冰的。","yào, wǒ yào hē bīng de","Yes, I want to drink the iced one"],["您要大杯的紅茶還是小杯的？","nín yào dà bēi de hóngchá háishì xiǎo bēi de","Would you like a large black tea or a small one?"],["我要小杯的。","wǒ yào xiǎo bēi de","I want the small one"]];
+var CAFE_GRAM2=[["如果您點一個雞肉三明治，我們就送您一杯飲料。","rúguǒ nín diǎn yí ge jīròu sānmíngzhì, wǒmen jiù sòng nín yì bēi yǐnliào","If you order a chicken sandwich, then we'll give you a free drink"],["明文如果要請我吃晚飯，我就一定去。","Míngwén rúguǒ yào qǐng wǒ chī wǎnfàn, wǒ jiù yídìng qù","If Mingwen wants to treat me to dinner, then I'll definitely go"],["如果下雨，我就不去公園。","rúguǒ xià yǔ, wǒ jiù bú qù gōngyuán","If it rains, then I won't go to the park"],["如果媽媽今天不做晚飯，我就去美味餐廳吃。","rúguǒ māma jīntiān bú zuò wǎnfàn, wǒ jiù qù Měiwèi Cāntīng chī","If my mother doesn't cook dinner today, then I'll eat at Tasty Café"]];
+var CAFE_GRAM3=[["我媽媽跟明文的媽媽一樣，都在小學教書。","wǒ māma gēn Míngwén de māma yíyàng, dōu zài xiǎoxué jiāo shū","My mother teaches at an elementary school, just like Mingwen's mother"],["王先生跟張先生一樣，都喜歡吃蛋糕。","Wáng xiānshēng gēn Zhāng xiānshēng yíyàng, dōu xǐhuān chī dàngāo","Mr. Wang likes to eat cake, just like Mr. Zhang"],["他的太陽眼鏡跟我的一樣貴。","tā de tàiyáng yǎnjìng gēn wǒ de yíyàng guì","His sunglasses are as expensive as mine"],["李老師跟王老師一樣忙。","Lǐ lǎoshī gēn Wáng lǎoshī yíyàng máng","Teacher Li is just as busy as Teacher Wang"]];
 
 /* ---------------- RENDER ---------------- */
 var SPK='<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
@@ -778,7 +792,18 @@ var LESSON_PAGES={
               {kind:"pairs",head:"④ Grammar · Doing things together",sub:"跟…一起",intro:"Put 跟 + a person before the main verb to say you do something together with them; 一起 (together) usually goes with 跟. Pattern: 跟 + someone + 一起 + verb (+ object).",data:PLAN_GRAM4},
               {kind:"audio",head:"🔊 Pinyin practice",sub:"語音",intro:"Finals in this lesson: -uai, -ui (uei), -üe, -en, -in. Play the official recording and repeat each syllable in all four tones (kuai · huai · wai · dui · hui · gui · sui · wei · xue · yue · men · jin · yin). Spelling notes from the textbook: (1) -uai with no initial → wai (外 wài). (2) -ui with no initial → wei (喂 wéi). (3) -üe only follows j / q / x and is written -ue (學 xué, 缺 quē, 覺 jué). (4) -üe with no initial → yue (月 yuè). (5) -in with no initial → yin (銀 yín).",data:[["Pinyin & syllables — official recording","L9-pinyin.mp3"]]},
               {kind:"audio",head:"🎧 Listen to the lesson",sub:"錄音",intro:"Native-voice recordings from 全球華文網 — listen along with the textbook.",data:[["Dialogue 課文","L9-text.mp3"],["Vocabulary 生詞","L9-vocab.mp3"],["Grammar 語法","L9-grammar.mp3"]]},
-              {kind:"links",head:"📺 Watch & listen",sub:"影片·音檔",intro:'Official Lesson&nbsp;9 resources from 全球華文網 (free): <a href="https://www.youtube.com/watch?v=U-42EZJ3okU" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">📺 teaching video</a> &nbsp;·&nbsp; <a href="https://www.huayuworld.org/Ebook/ebookDetail?EID=682" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">🎧 official audio &amp; materials</a>. Tap 🔊 on any card above to hear it spoken.'}]}
+              {kind:"links",head:"📺 Watch & listen",sub:"影片·音檔",intro:'Official Lesson&nbsp;9 resources from 全球華文網 (free): <a href="https://www.youtube.com/watch?v=U-42EZJ3okU" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">📺 teaching video</a> &nbsp;·&nbsp; <a href="https://www.huayuworld.org/Ebook/ebookDetail?EID=682" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">🎧 official audio &amp; materials</a>. Tap 🔊 on any card above to hear it spoken.'}]},
+  coffee:{n:8,title:"Café Orders",zh:"點咖啡",icon:"☕",done:0,total:44,
+    tip:"Ordering at a Taiwanese café follows a friendly script: staff ask 您要熱的還是冰的?(hot or iced?), then 大杯、中杯還是小杯?(which size?), and whether to 加牛奶、加糖 (add milk or sugar). Answer with 的-phrases — 我要冰的、小杯的 — and you'll sound like a local. It pairs naturally with the Drinks & Desserts lesson's 甜度 (sugar) and 冰塊 (ice) modules.",
+    sections:[{kind:"pairs",head:"☕ Drinks & foods",sub:"飲料·食物",data:CAFE_DRINKS},
+              {kind:"pairs",head:"🌡️ Hot or iced · sizes",sub:"冷熱·大小",data:CAFE_TEMP},
+              {kind:"pairs",head:"➕ Add-ons & tastes",sub:"加料·味道",data:CAFE_ADD},
+              {kind:"pairs",head:"🗣️ Ordering phrases",sub:"點餐用語",data:CAFE_ORDER},
+              {kind:"pairs",head:"① Grammar · Dropping the noun after 的",sub:"的字省略",intro:"When the head noun after 的 is clear from context, drop it and keep 的: 您要熱的還是冰的? = hot [coffee] or iced [coffee]? Answer with just the 的-phrase — 我要冰的 (I want the iced one), 我要小杯的 (I want the small one).",data:CAFE_GRAM1},
+              {kind:"pairs",head:"② Grammar · If … then …",sub:"如果……就……",intro:"如果 (if) marks the condition and 就 (then) sits right before the verb of the result clause: 如果下雨，我就不去。 如果 may come before or after the subject (如果你去 = 你如果去). 就 is not optional — it links the two halves.",data:CAFE_GRAM2},
+              {kind:"pairs",head:"③ Grammar · A is the same as B",sub:"A 跟 B 一樣",intro:"Use A 跟 B 一樣 to say two things are alike: 他的背包跟我的一樣 (his backpack is the same as mine). Add an adjective after 一樣 to say how they match — 一樣貴 (equally expensive), 一樣忙 (equally busy); add 都 + verb for a shared habit — 都喜歡吃蛋糕.",data:CAFE_GRAM3},
+              {kind:"audio",head:"🎧 Listen to the lesson",sub:"錄音",intro:"Native-voice recordings from 全球華文網 — listen along with the textbook.",data:[["Dialogue 課文","B2-L04-text.mp3"],["Vocabulary 生詞","B2-L04-vocab.mp3"],["Grammar 語法","B2-L04-grammar.mp3"]]},
+              {kind:"links",head:"📺 Watch & listen",sub:"影片·音檔",intro:'Official Lesson&nbsp;4 resources from 全球華文網 (free): <a href="https://www.youtube.com/watch?v=HkBaseOCZPk" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">📺 teaching video</a> &nbsp;·&nbsp; <a href="https://www.huayuworld.org/Ebook/ebookDetail?EID=683" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">🎧 official audio &amp; materials</a>. Tap 🔊 on any card above to hear it spoken.'}]}
 };
 function buildLesson(key){
   var p=LESSON_PAGES[key]; if(!p)return '';
